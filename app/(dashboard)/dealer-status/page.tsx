@@ -1,0 +1,191 @@
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Search, CheckCircle2, XCircle, ToggleLeft, ToggleRight } from "lucide-react"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+
+export default function DealerStatusPage() {
+  return (
+    <div className="flex flex-col gap-4">
+      <div>
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight">Dealer Status Management</h1>
+        <p className="text-muted-foreground">Manage active and inactive dealers</p>
+      </div>
+
+      <div className="grid gap-4 grid-cols-1 md:grid-cols-3">
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium">Total Dealers</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">125</div>
+            <p className="text-xs text-muted-foreground">Across all anchors</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium">Active Dealers</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">98</div>
+            <p className="text-xs text-muted-foreground">78.4% of total dealers</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium">Inactive Dealers</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">27</div>
+            <p className="text-xs text-muted-foreground">21.6% of total dealers</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <Tabs defaultValue="all" className="space-y-4">
+        <div className="flex items-center justify-between">
+          <TabsList>
+            <TabsTrigger value="all">All Dealers</TabsTrigger>
+            <TabsTrigger value="active">Active</TabsTrigger>
+            <TabsTrigger value="inactive">Inactive</TabsTrigger>
+          </TabsList>
+          <div className="flex items-center gap-2">
+            <Select defaultValue="all">
+              <SelectTrigger className="w-[180px] h-9">
+                <SelectValue placeholder="Filter by anchor" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Anchors</SelectItem>
+                <SelectItem value="standard-bank">Standard Bank</SelectItem>
+                <SelectItem value="shoprite">Shoprite Holdings</SelectItem>
+                <SelectItem value="mtn">MTN Group</SelectItem>
+                <SelectItem value="sasol">Sasol Limited</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        <Card>
+          <CardHeader className="p-4">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              <div className="flex items-center gap-2 w-full max-w-sm">
+                <Search className="h-4 w-4 text-muted-foreground" />
+                <Input placeholder="Search dealers..." className="h-9" />
+              </div>
+              <div className="flex items-center gap-2 ml-auto">
+                <Button variant="outline" size="sm">
+                  Export
+                </Button>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="p-0 overflow-auto">
+            <div className="w-full min-w-[640px]">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Dealer ID</TableHead>
+                    <TableHead>Name</TableHead>
+                    <TableHead>Anchor</TableHead>
+                    <TableHead>Contact Person</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead>Last Updated</TableHead>
+                    <TableHead className="text-right">Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {dealerStatusData.map((dealer) => (
+                    <TableRow key={dealer.id}>
+                      <TableCell className="font-medium">{dealer.id}</TableCell>
+                      <TableCell>{dealer.name}</TableCell>
+                      <TableCell>{dealer.anchor}</TableCell>
+                      <TableCell>{dealer.contactPerson}</TableCell>
+                      <TableCell>
+                        <div
+                          className={`inline-flex items-center gap-2 rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+                            dealer.status === "Active"
+                              ? "bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-300"
+                              : "bg-yellow-50 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-300"
+                          }`}
+                        >
+                          {dealer.status === "Active" ? (
+                            <CheckCircle2 className="h-3 w-3" />
+                          ) : (
+                            <XCircle className="h-3 w-3" />
+                          )}
+                          {dealer.status}
+                        </div>
+                      </TableCell>
+                      <TableCell>{dealer.lastUpdated}</TableCell>
+                      <TableCell className="text-right">
+                        <Button variant="ghost" size="sm" className="gap-2">
+                          {dealer.status === "Active" ? (
+                            <>
+                              <ToggleRight className="h-4 w-4" />
+                              Deactivate
+                            </>
+                          ) : (
+                            <>
+                              <ToggleLeft className="h-4 w-4" />
+                              Activate
+                            </>
+                          )}
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </CardContent>
+        </Card>
+      </Tabs>
+    </div>
+  )
+}
+
+const dealerStatusData = [
+  {
+    id: "DLR001",
+    name: "Cape Town Motors",
+    anchor: "Standard Bank",
+    contactPerson: "James Wilson",
+    status: "Active",
+    lastUpdated: "2023-11-15",
+  },
+  {
+    id: "DLR002",
+    name: "Joburg Auto Supplies",
+    anchor: "Shoprite Holdings",
+    contactPerson: "Lerato Molefe",
+    status: "Active",
+    lastUpdated: "2023-11-14",
+  },
+  {
+    id: "DLR003",
+    name: "Durban Electronics",
+    anchor: "MTN Group",
+    contactPerson: "Raj Patel",
+    status: "Inactive",
+    lastUpdated: "2023-11-10",
+  },
+  {
+    id: "DLR005",
+    name: "Bloemfontein Distributors",
+    anchor: "Discovery Limited",
+    contactPerson: "Nomsa Dlamini",
+    status: "Active",
+    lastUpdated: "2023-11-12",
+  },
+  {
+    id: "DLR008",
+    name: "East London Traders",
+    anchor: "Standard Bank",
+    contactPerson: "John Smith",
+    status: "Inactive",
+    lastUpdated: "2023-11-05",
+  },
+]
+
