@@ -49,7 +49,7 @@ export function StopSupplyDetail({ dealer }: { dealer: StopSupplyDealer }) {
               </dd>
 
               <dt className="font-medium">Overdue Amount:</dt>
-              <dd>R {dealer.overdueAmount.toLocaleString()}</dd>
+              <dd>₹ {dealer.overdueAmount.toLocaleString()}</dd>
 
               <dt className="font-medium">Stop Supply Duration:</dt>
               <dd>{dealer.stopSupplyDays} days</dd>
@@ -105,7 +105,7 @@ export function StopSupplyDetail({ dealer }: { dealer: StopSupplyDealer }) {
                           {item.overdueDays} days
                         </Badge>
                       </TableCell>
-                      <TableCell>R {item.overdueAmount.toLocaleString()}</TableCell>
+                      <TableCell>₹ {item.overdueAmount.toLocaleString()}</TableCell>
                       <TableCell>{item.triggeredDate}</TableCell>
                       <TableCell>
                         <div className="flex items-center gap-2">

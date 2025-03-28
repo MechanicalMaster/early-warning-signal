@@ -30,7 +30,7 @@ export function UserTransactions({ userId }: { userId: string }) {
               </p>
             </div>
             <div className={`ml-auto font-medium ${transaction.type === "credit" ? "text-green-500" : "text-red-500"}`}>
-              {transaction.type === "credit" ? "+" : "-"}R {transaction.amount.toFixed(2)}
+              {transaction.type === "credit" ? "+" : "-"}₹ {transaction.amount.toFixed(2)}
             </div>
           </div>
           <div className="mt-2 text-xs text-muted-foreground">Reference: {transaction.reference}</div>

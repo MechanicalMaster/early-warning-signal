@@ -39,7 +39,7 @@ export default function StopSupplyPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              R {stopSupplyDealers.reduce((sum, dealer) => sum + dealer.overdueAmount, 0).toLocaleString()}
+              ₹ {stopSupplyDealers.reduce((sum, dealer) => sum + dealer.overdueAmount, 0).toLocaleString()}
             </div>
             <p className="text-xs text-muted-foreground">Across all stop supply dealers</p>
           </CardContent>
@@ -165,7 +165,7 @@ export default function StopSupplyPage() {
                         {dealer.overdueDays} days
                       </Badge>
                     </TableCell>
-                    <TableCell>R {dealer.overdueAmount.toLocaleString()}</TableCell>
+                    <TableCell>₹ {dealer.overdueAmount.toLocaleString()}</TableCell>
                     <TableCell>{dealer.stopSupplyDays} days</TableCell>
                     <TableCell>{dealer.lastTriggeredDate}</TableCell>
                     <TableCell className="text-right">

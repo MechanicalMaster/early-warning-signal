@@ -54,7 +54,7 @@ export default function DealerMasterPage() {
                     <TableCell>{dealer.name}</TableCell>
                     <TableCell>{dealer.anchor}</TableCell>
                     <TableCell>{dealer.contactEmail || "Not specified"}</TableCell>
-                    <TableCell>R {dealer.creditLimit.toLocaleString()}</TableCell>
+                    <TableCell>₹ {dealer.creditLimit.toLocaleString()}</TableCell>
                     <TableCell>
                       <div
                         className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${

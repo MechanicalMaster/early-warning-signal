@@ -21,7 +21,7 @@ export default function FLDGViewPage() {
             <CardTitle className="text-sm font-medium">Total FLDG Amount</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">R 25,000,000</div>
+            <div className="text-2xl font-bold">₹ 25,000,000</div>
             <p className="text-xs text-muted-foreground">Across all anchors</p>
           </CardContent>
         </Card>
@@ -30,7 +30,7 @@ export default function FLDGViewPage() {
             <CardTitle className="text-sm font-medium">Utilized FLDG</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">R 8,750,000</div>
+            <div className="text-2xl font-bold">₹ 8,750,000</div>
             <p className="text-xs text-muted-foreground">35% of total FLDG</p>
             <Progress value={35} className="h-2 mt-2" />
           </CardContent>
@@ -40,7 +40,7 @@ export default function FLDGViewPage() {
             <CardTitle className="text-sm font-medium">Available FLDG</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">R 16,250,000</div>
+            <div className="text-2xl font-bold">₹ 16,250,000</div>
             <p className="text-xs text-muted-foreground">65% of total FLDG</p>
             <Progress value={65} className="h-2 mt-2" />
           </CardContent>
@@ -97,7 +97,7 @@ export default function FLDGViewPage() {
                             {item.overdueDays} days
                           </Badge>
                         </TableCell>
-                        <TableCell>R {item.overdueAmount.toLocaleString()}</TableCell>
+                        <TableCell>₹ {item.overdueAmount.toLocaleString()}</TableCell>
                         <TableCell>{item.fldgInvocationDays} days</TableCell>
                         <TableCell>{item.lastInvocation || "N/A"}</TableCell>
                         <TableCell className="text-right">
@@ -164,9 +164,9 @@ export default function FLDGViewPage() {
                             {item.anchor}
                           </div>
                         </TableCell>
-                        <TableCell>R {item.totalAmount.toLocaleString()}</TableCell>
-                        <TableCell>R {item.utilized.toLocaleString()}</TableCell>
-                        <TableCell>R {item.available.toLocaleString()}</TableCell>
+                        <TableCell>₹ {item.totalAmount.toLocaleString()}</TableCell>
+                        <TableCell>₹ {item.utilized.toLocaleString()}</TableCell>
+                        <TableCell>₹ {item.available.toLocaleString()}</TableCell>
                         <TableCell>
                           <div className="flex items-center gap-2">
                             <Progress value={item.utilizationPercentage} className="h-2 w-20" />
