@@ -158,34 +158,6 @@ export default function TemplatesPage() {
 
 const emailTemplates = [
   {
-    title: "Welcome Email",
-    description: "Sent to new users when they register",
-    icon: <Mail className="h-4 w-4" />,
-    lastUpdated: "2023-11-10",
-    usedIn: "User Registration",
-  },
-  {
-    title: "Password Reset",
-    description: "Sent when a user requests a password reset",
-    icon: <Mail className="h-4 w-4" />,
-    lastUpdated: "2023-11-05",
-    usedIn: "Password Recovery",
-  },
-  {
-    title: "Account Verification",
-    description: "Sent to verify user email addresses",
-    icon: <CheckCircle className="h-4 w-4" />,
-    lastUpdated: "2023-10-28",
-    usedIn: "User Verification",
-  },
-  {
-    title: "Payment Confirmation",
-    description: "Sent after a successful payment",
-    icon: <CheckCircle className="h-4 w-4" />,
-    lastUpdated: "2023-10-15",
-    usedIn: "Payment Processing",
-  },
-  {
     title: "Stop Supply Notice",
     description: "Sent when a dealer is placed on stop supply",
     icon: <AlertCircle className="h-4 w-4" />,

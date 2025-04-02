@@ -5,6 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Search, CheckCircle2, XCircle, ToggleLeft, ToggleRight } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { EditDealerDialog, type Dealer } from "@/components/edit-dealer-dialog"
 
 export default function DealerStatusPage() {
   return (
@@ -89,10 +90,12 @@ export default function DealerStatusPage() {
                     <TableHead>Dealer ID</TableHead>
                     <TableHead>Name</TableHead>
                     <TableHead>Anchor</TableHead>
-                    <TableHead>Contact Person</TableHead>
+                    <TableHead>Sanctioned Limit</TableHead>
+                    <TableHead>Utilised Limit</TableHead>
+                    <TableHead>Utilisation %</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead>Last Updated</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
+                    <TableHead className="text-right">Edit</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -101,7 +104,9 @@ export default function DealerStatusPage() {
                       <TableCell className="font-medium">{dealer.id}</TableCell>
                       <TableCell>{dealer.name}</TableCell>
                       <TableCell>{dealer.anchor}</TableCell>
-                      <TableCell>{dealer.contactPerson}</TableCell>
+                      <TableCell>₹{dealer.sanctionedLimit.toLocaleString()}</TableCell>
+                      <TableCell>₹{dealer.utilisedLimit.toLocaleString()}</TableCell>
+                      <TableCell>{dealer.utilisationPercentage}%</TableCell>
                       <TableCell>
                         <div
                           className={`inline-flex items-center gap-2 rounded-full px-2.5 py-0.5 text-xs font-semibold ${
@@ -120,19 +125,7 @@ export default function DealerStatusPage() {
                       </TableCell>
                       <TableCell>{dealer.lastUpdated}</TableCell>
                       <TableCell className="text-right">
-                        <Button variant="ghost" size="sm" className="gap-2">
-                          {dealer.status === "Active" ? (
-                            <>
-                              <ToggleRight className="h-4 w-4" />
-                              Deactivate
-                            </>
-                          ) : (
-                            <>
-                              <ToggleLeft className="h-4 w-4" />
-                              Activate
-                            </>
-                          )}
-                        </Button>
+                        <EditDealerDialog dealer={dealer} />
                       </TableCell>
                     </TableRow>
                   ))}
@@ -146,46 +139,56 @@ export default function DealerStatusPage() {
   )
 }
 
-const dealerStatusData = [
+const dealerStatusData: Dealer[] = [
   {
     id: "DLR001",
     name: "Cape Town Motors",
     anchor: "Standard Bank",
-    contactPerson: "James Wilson",
     status: "Active",
     lastUpdated: "2023-11-15",
+    sanctionedLimit: 1000000,
+    utilisedLimit: 750000,
+    utilisationPercentage: 75,
   },
   {
     id: "DLR002",
     name: "Joburg Auto Supplies",
     anchor: "Shoprite Holdings",
-    contactPerson: "Lerato Molefe",
     status: "Active",
     lastUpdated: "2023-11-14",
+    sanctionedLimit: 500000,
+    utilisedLimit: 425000,
+    utilisationPercentage: 85,
   },
   {
     id: "DLR003",
     name: "Durban Electronics",
     anchor: "MTN Group",
-    contactPerson: "Raj Patel",
     status: "Inactive",
     lastUpdated: "2023-11-10",
+    sanctionedLimit: 750000,
+    utilisedLimit: 600000,
+    utilisationPercentage: 80,
   },
   {
     id: "DLR005",
     name: "Bloemfontein Distributors",
     anchor: "Discovery Limited",
-    contactPerson: "Nomsa Dlamini",
     status: "Active",
     lastUpdated: "2023-11-12",
+    sanctionedLimit: 1500000,
+    utilisedLimit: 900000,
+    utilisationPercentage: 60,
   },
   {
     id: "DLR008",
     name: "East London Traders",
     anchor: "Standard Bank",
-    contactPerson: "John Smith",
     status: "Inactive",
     lastUpdated: "2023-11-05",
+    sanctionedLimit: 2000000,
+    utilisedLimit: 1800000,
+    utilisationPercentage: 90,
   },
 ]
 

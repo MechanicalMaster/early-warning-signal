@@ -33,10 +33,6 @@ export default function ReportsPage() {
             <FileText className="h-4 w-4 mr-2" />
             Standard Reports
           </TabsTrigger>
-          <TabsTrigger value="custom">
-            <BarChart className="h-4 w-4 mr-2" />
-            Custom Reports
-          </TabsTrigger>
           <TabsTrigger value="scheduled">
             <Calendar className="h-4 w-4 mr-2" />
             Scheduled Reports
@@ -86,84 +82,6 @@ export default function ReportsPage() {
               </Card>
             ))}
           </div>
-        </TabsContent>
-
-        <TabsContent value="custom" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Custom Report Builder</CardTitle>
-              <CardDescription>Create a custom report by selecting fields and filters</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="reportName">Report Name</Label>
-                <Input id="reportName" placeholder="Enter report name" />
-              </div>
-
-              <div className="space-y-2">
-                <Label>Report Type</Label>
-                <Select defaultValue="dealer">
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select report type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="dealer">Dealer Report</SelectItem>
-                    <SelectItem value="anchor">Anchor Report</SelectItem>
-                    <SelectItem value="transaction">Transaction Report</SelectItem>
-                    <SelectItem value="fldg">FLDG Report</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="space-y-2">
-                <Label>Date Range</Label>
-                <DatePickerWithRange />
-              </div>
-
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <Label>Fields to Include</Label>
-                  <Button variant="outline" size="sm" className="gap-2">
-                    <Filter className="h-4 w-4" />
-                    Add Filter
-                  </Button>
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                  <div className="flex items-center space-x-2">
-                    <input type="checkbox" id="field1" className="rounded border-gray-300" defaultChecked />
-                    <Label htmlFor="field1">ID</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <input type="checkbox" id="field2" className="rounded border-gray-300" defaultChecked />
-                    <Label htmlFor="field2">Name</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <input type="checkbox" id="field3" className="rounded border-gray-300" defaultChecked />
-                    <Label htmlFor="field3">Status</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <input type="checkbox" id="field4" className="rounded border-gray-300" defaultChecked />
-                    <Label htmlFor="field4">Anchor</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <input type="checkbox" id="field5" className="rounded border-gray-300" />
-                    <Label htmlFor="field5">Credit Limit</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <input type="checkbox" id="field6" className="rounded border-gray-300" />
-                    <Label htmlFor="field6">Contact Person</Label>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-            <CardFooter className="flex justify-between">
-              <Button variant="outline">Save Template</Button>
-              <Button className="gap-2">
-                <Download className="h-4 w-4" />
-                Generate Report
-              </Button>
-            </CardFooter>
-          </Card>
         </TabsContent>
 
         <TabsContent value="scheduled" className="space-y-4">

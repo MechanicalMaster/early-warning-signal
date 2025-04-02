@@ -14,30 +14,68 @@ export function EmailTemplateEditor() {
   <style>
     body { font-family: Arial, sans-serif; line-height: 1.6; }
     .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-    .header { background-color: #f8f9fa; padding: 20px; text-align: center; }
+    .header { background-color: #dc2626; padding: 20px; text-align: center; color: white; }
     .content { padding: 20px; }
     .footer { background-color: #f8f9fa; padding: 20px; text-align: center; font-size: 12px; }
-    .button { background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; }
+    .warning-box { background-color: #fee2e2; border: 1px solid #dc2626; padding: 15px; margin: 20px 0; border-radius: 4px; }
+    .details-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    .details-table th, .details-table td { border: 1px solid #e5e7eb; padding: 12px; text-align: left; }
+    .details-table th { background-color: #f8f9fa; }
+    .amount { font-weight: bold; color: #dc2626; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <h2>Welcome to Sambo!</h2>
+      <h2>⚠️ Stop Supply Notice</h2>
     </div>
     <div class="content">
-      <p>Hello {{name}},</p>
-      <p>Thank you for registering with Sambo. We're excited to have you on board!</p>
-      <p>Your account has been created successfully. You can now log in using your email and password.</p>
-      <p style="text-align: center; margin: 30px 0;">
-        <a href="{{loginUrl}}" class="button">Log In to Your Account</a>
+      <p>Dear {{dealerName}},</p>
+      
+      <div class="warning-box">
+        <p><strong>Important Notice:</strong> Your account has been placed on stop supply status due to payment defaults.</p>
+      </div>
+
+      <p>This notice is to inform you that your account has been placed on stop supply effective {{effectiveDate}} due to the following outstanding payments:</p>
+      
+      <table class="details-table">
+        <tr>
+          <th>Invoice Number</th>
+          <th>Due Date</th>
+          <th>Overdue Amount</th>
+          <th>Days Overdue</th>
+        </tr>
+        <tr>
+          <td>{{invoiceNumber}}</td>
+          <td>{{dueDate}}</td>
+          <td class="amount">₹ {{overdueAmount}}</td>
+          <td>{{overdueDays}} days</td>
+        </tr>
+      </table>
+
+      <p><strong>Total Outstanding Amount: </strong><span class="amount">₹ {{totalOutstanding}}</span></p>
+
+      <p>To resolve this situation and restore your supply status, please:</p>
+      <ol>
+        <li>Make immediate payment of the outstanding amount</li>
+        <li>Submit proof of payment to {{anchorEmail}}</li>
+        <li>Contact your account manager for payment verification</li>
+      </ol>
+
+      <p>Please note that your supply will remain suspended until the outstanding payments are settled.</p>
+      
+      <p>For any queries or assistance, please contact:</p>
+      <p>
+        Account Manager: {{accountManager}}<br>
+        Phone: {{accountManagerPhone}}<br>
+        Email: {{accountManagerEmail}}
       </p>
-      <p>If you have any questions, please don't hesitate to contact our support team.</p>
-      <p>Best regards,<br>The Sambo Team</p>
+
+      <p>Best regards,<br>{{companyName}}</p>
     </div>
     <div class="footer">
-      <p>© 2023 Sambo. All rights reserved.</p>
-      <p>You're receiving this email because you signed up for Sambo.</p>
+      <p>© 2024 {{companyName}}. All rights reserved.</p>
+      <p>This is an automated notification. Please do not reply to this email.</p>
     </div>
   </div>
 </body>
@@ -49,26 +87,23 @@ export function EmailTemplateEditor() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="templateName">Template Name</Label>
-          <Input id="templateName" defaultValue="Welcome Email" />
+          <Input id="templateName" defaultValue="Stop Supply Notice" />
         </div>
         <div className="space-y-2">
           <Label htmlFor="templateSubject">Email Subject</Label>
-          <Input id="templateSubject" defaultValue="Welcome to Sambo!" />
+          <Input id="templateSubject" defaultValue="⚠️ URGENT: Stop Supply Notice - Action Required" />
         </div>
       </div>
 
       <div className="space-y-2">
         <Label>Template Type</Label>
-        <Select defaultValue="welcome">
+        <Select defaultValue="stop-supply">
           <SelectTrigger>
             <SelectValue placeholder="Select template type" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="welcome">Welcome Email</SelectItem>
-            <SelectItem value="password-reset">Password Reset</SelectItem>
-            <SelectItem value="verification">Account Verification</SelectItem>
-            <SelectItem value="payment">Payment Confirmation</SelectItem>
             <SelectItem value="stop-supply">Stop Supply Notice</SelectItem>
+            <SelectItem value="credit-limit">Credit Limit Warning</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -77,16 +112,37 @@ export function EmailTemplateEditor() {
         <Label>Available Variables</Label>
         <div className="flex flex-wrap gap-2">
           <div className="inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold">
-            {"{{name}}"}
+            {"{{dealerName}}"}
           </div>
           <div className="inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold">
-            {"{{email}}"}
+            {"{{effectiveDate}}"}
           </div>
           <div className="inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold">
-            {"{{loginUrl}}"}
+            {"{{invoiceNumber}}"}
           </div>
           <div className="inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold">
-            {"{{resetUrl}}"}
+            {"{{dueDate}}"}
+          </div>
+          <div className="inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold">
+            {"{{overdueAmount}}"}
+          </div>
+          <div className="inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold">
+            {"{{overdueDays}}"}
+          </div>
+          <div className="inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold">
+            {"{{totalOutstanding}}"}
+          </div>
+          <div className="inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold">
+            {"{{anchorEmail}}"}
+          </div>
+          <div className="inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold">
+            {"{{accountManager}}"}
+          </div>
+          <div className="inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold">
+            {"{{accountManagerPhone}}"}
+          </div>
+          <div className="inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold">
+            {"{{accountManagerEmail}}"}
           </div>
           <div className="inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold">
             {"{{companyName}}"}

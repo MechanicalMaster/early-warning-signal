@@ -22,37 +22,57 @@ export type Dealer = {
   id: string
   name: string
   anchor: string
-  contactPerson: string
-  contactEmail?: string
-  creditLimit: number
+  sanctionedLimit: number
+  utilisedLimit: number
+  utilisationPercentage: number
   status: string
+  lastUpdated: string
 }
 
 export function EditDealerDialog({ dealer }: { dealer: Dealer }) {
   const [open, setOpen] = useState(false)
-  const [formData, setFormData] = useState<Dealer>({ 
+  const [formData, setFormData] = useState<Dealer & { 
+    statusReason?: string
+    comments?: string 
+  }>({ 
     ...dealer,
-    contactEmail: dealer.contactEmail || ""
+    statusReason: "",
+    comments: ""
   })
+  const [previousStatus, setPreviousStatus] = useState(dealer.status)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target
     setFormData((prev) => ({ ...prev, [id]: value }))
   }
 
   const handleSelectChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-  }
-
-  const handleCreditLimitChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseFloat(e.target.value)
-    if (!isNaN(value)) {
-      setFormData((prev) => ({ ...prev, creditLimit: value }))
+    if (field === "status") {
+      setFormData((prev) => ({ 
+        ...prev, 
+        [field]: value,
+        statusReason: "",
+        comments: ""
+      }))
+      setPreviousStatus(value)
+    } else {
+      setFormData((prev) => ({ ...prev, [field]: value }))
     }
   }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    if ((formData.status === "Inactive" && previousStatus === "Active") || 
+        (formData.status === "Active" && previousStatus === "Inactive")) {
+      if (!formData.statusReason) {
+        alert("Please select a reason for changing the dealer status")
+        return
+      }
+      if (!formData.comments) {
+        alert("Please provide comments for changing the dealer status")
+        return
+      }
+    }
     // In a real app, you would submit the form data to your API
     console.log("Updated dealer data:", formData)
     setOpen(false)
@@ -82,7 +102,7 @@ export function EditDealerDialog({ dealer }: { dealer: Dealer }) {
 
             <div className="space-y-2">
               <Label htmlFor="name">Dealer Name</Label>
-              <Input id="name" value={formData.name} onChange={handleChange} required />
+              <Input id="name" value={formData.name} disabled className="bg-muted" />
             </div>
 
             <div className="space-y-2">
@@ -91,25 +111,35 @@ export function EditDealerDialog({ dealer }: { dealer: Dealer }) {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="contactEmail">Anchor Contact Email</Label>
+              <Label htmlFor="sanctionedLimit">Sanctioned Limit (₹)</Label>
               <Input 
-                id="contactEmail" 
-                type="email"
-                value={formData.contactEmail} 
-                onChange={handleChange} 
-                placeholder="contact@example.com"
+                id="sanctionedLimit" 
+                type="number" 
+                value={formData.sanctionedLimit} 
+                onChange={handleChange}
                 required 
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="creditLimit">Credit Limit (ZAR)</Label>
+              <Label htmlFor="utilisedLimit">Utilised Limit (₹)</Label>
               <Input 
-                id="creditLimit" 
+                id="utilisedLimit" 
                 type="number" 
-                value={formData.creditLimit} 
-                onChange={handleCreditLimitChange}
-                required 
+                value={formData.utilisedLimit} 
+                disabled
+                className="bg-muted"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="utilisationPercentage">Utilisation Percentage</Label>
+              <Input 
+                id="utilisationPercentage" 
+                type="number" 
+                value={formData.utilisationPercentage} 
+                disabled
+                className="bg-muted"
               />
             </div>
 
@@ -125,10 +155,55 @@ export function EditDealerDialog({ dealer }: { dealer: Dealer }) {
                 <SelectContent>
                   <SelectItem value="Active">Active</SelectItem>
                   <SelectItem value="Inactive">Inactive</SelectItem>
-                  <SelectItem value="Stop Supply">Stop Supply</SelectItem>
                 </SelectContent>
               </Select>
             </div>
+
+            {((formData.status === "Inactive" && previousStatus === "Active") || 
+              (formData.status === "Active" && previousStatus === "Inactive")) && (
+              <>
+                <div className="space-y-2">
+                  <Label htmlFor="statusReason">Reason for {formData.status === "Active" ? "Activation" : "Inactivation"}</Label>
+                  <Select
+                    value={formData.statusReason}
+                    onValueChange={(value) => handleSelectChange("statusReason", value)}
+                  >
+                    <SelectTrigger id="statusReason">
+                      <SelectValue placeholder={`Select reason for ${formData.status === "Active" ? "activation" : "inactivation"}`} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {formData.status === "Active" ? (
+                        <>
+                          <SelectItem value="issue-resolved">Issue Resolved</SelectItem>
+                          <SelectItem value="payment-received">Payment Received</SelectItem>
+                          <SelectItem value="documentation-complete">Documentation Complete</SelectItem>
+                          <SelectItem value="management-approval">Management Approval</SelectItem>
+                        </>
+                      ) : (
+                        <>
+                          <SelectItem value="payment-default">Payment Default</SelectItem>
+                          <SelectItem value="documentation-pending">Documentation Pending</SelectItem>
+                          <SelectItem value="compliance-issues">Compliance Issues</SelectItem>
+                          <SelectItem value="business-closure">Business Closure</SelectItem>
+                        </>
+                      )}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="comments">Comments</Label>
+                  <textarea
+                    id="comments"
+                    className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="Please provide additional comments"
+                    value={formData.comments}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </>
+            )}
           </div>
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => setOpen(false)}>

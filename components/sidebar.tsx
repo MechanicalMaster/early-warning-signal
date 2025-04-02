@@ -18,7 +18,9 @@ import {
   Mail,
   Sliders,
   X,
-  Palette
+  Palette,
+  Clock,
+  BarChart
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
@@ -219,6 +221,8 @@ const monitoringItems: NavItem[] = [
   { name: "Stop Supply", href: "/stop-supply", icon: AlertOctagon, badge: "3" },
   { name: "FLDG View", href: "/fldg-view", icon: Shield },
   { name: "Dealer Status", href: "/dealer-status", icon: Store },
+  { name: "Anchor Expiry", href: "/anchor-expiry", icon: Clock },
+  { name: "Program Review", href: "/program-review", icon: BarChart },
 ];
 
 const adminItems: NavItem[] = [
@@ -228,7 +232,6 @@ const adminItems: NavItem[] = [
 ];
 
 const footerItems: FooterItem[] = [
-  { name: "Settings", href: "/settings", icon: Settings },
   { 
     name: "Logout", 
     href: "#", 

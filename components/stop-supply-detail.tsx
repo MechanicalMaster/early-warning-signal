@@ -71,10 +71,6 @@ export function StopSupplyDetail({ dealer }: { dealer: StopSupplyDealer }) {
             <Mail className="h-4 w-4 mr-2" />
             Communications
           </TabsTrigger>
-          <TabsTrigger value="documents">
-            <FileText className="h-4 w-4 mr-2" />
-            Documents
-          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="history" className="space-y-4">
@@ -191,47 +187,6 @@ export function StopSupplyDetail({ dealer }: { dealer: StopSupplyDealer }) {
                   </Card>
                 )),
               )}
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="documents" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Related Documents</CardTitle>
-              <CardDescription>All documents related to stop supply events</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {dealer.history.map((item, historyIndex) => (
-                  <div key={historyIndex} className="space-y-2">
-                    <h3 className="text-sm font-medium">Invoice: {item.invoiceNumber}</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                      {item.attachments.map((attachment, attachmentIndex) => (
-                        <Card key={attachmentIndex} className="p-4 flex justify-between items-center">
-                          <div className="flex items-center gap-2">
-                            <FileText className="h-5 w-5 text-blue-500" />
-                            <div>
-                              <p className="font-medium text-sm">{attachment.name}</p>
-                              <p className="text-xs text-muted-foreground">
-                                {attachment.type} • {attachment.size}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="flex gap-1">
-                            <Button variant="ghost" size="icon">
-                              <Download className="h-4 w-4" />
-                            </Button>
-                            <Button variant="ghost" size="icon">
-                              <ExternalLink className="h-4 w-4" />
-                            </Button>
-                          </div>
-                        </Card>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
             </CardContent>
           </Card>
         </TabsContent>

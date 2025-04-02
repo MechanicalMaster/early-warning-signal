@@ -29,6 +29,8 @@ export type Anchor = {
   address?: string
   psmEmail?: string
   anchorEmails?: string[]
+  stopSupplyRule?: string
+  fldgInvocationRule?: string
 }
 
 export function EditAnchorDialog({ anchor }: { anchor: Anchor }) {
@@ -36,7 +38,9 @@ export function EditAnchorDialog({ anchor }: { anchor: Anchor }) {
   const [formData, setFormData] = useState<Anchor>({ 
     ...anchor,
     psmEmail: anchor.psmEmail || "",
-    anchorEmails: anchor.anchorEmails || [anchor.email || ""] 
+    anchorEmails: anchor.anchorEmails || [anchor.email || ""],
+    stopSupplyRule: anchor.stopSupplyRule || "rule1",
+    fldgInvocationRule: anchor.fldgInvocationRule || "standard"
   })
   const [newEmail, setNewEmail] = useState("")
 
@@ -97,7 +101,7 @@ export function EditAnchorDialog({ anchor }: { anchor: Anchor }) {
 
             <div className="space-y-2">
               <Label htmlFor="name">Anchor Name</Label>
-              <Input id="name" value={formData.name} onChange={handleChange} required />
+              <Input id="name" value={formData.name} disabled className="bg-muted" />
             </div>
 
             <div className="space-y-2">
@@ -136,6 +140,40 @@ export function EditAnchorDialog({ anchor }: { anchor: Anchor }) {
                 placeholder="psm@example.com"
                 required 
               />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="stopSupplyRule">Stop Supply Rules</Label>
+              <Select 
+                value={formData.stopSupplyRule} 
+                onValueChange={(value) => handleSelectChange("stopSupplyRule", value)}
+              >
+                <SelectTrigger id="stopSupplyRule">
+                  <SelectValue placeholder="Select stop supply rule" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="rule1">Rule 1 (7 days reminder, 3 days stop)</SelectItem>
+                  <SelectItem value="rule2">Rule 2 (5 days reminder, 2 days stop)</SelectItem>
+                  <SelectItem value="custom">Custom Rule</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="fldgInvocationRule">FLDG Invocation Rules</Label>
+              <Select 
+                value={formData.fldgInvocationRule} 
+                onValueChange={(value) => handleSelectChange("fldgInvocationRule", value)}
+              >
+                <SelectTrigger id="fldgInvocationRule">
+                  <SelectValue placeholder="Select FLDG invocation rule" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="standard">Standard (30 days)</SelectItem>
+                  <SelectItem value="expedited">Expedited (15 days)</SelectItem>
+                  <SelectItem value="extended">Extended (45 days)</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
 
             <div className="space-y-3">
