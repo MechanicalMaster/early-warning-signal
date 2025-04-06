@@ -24,9 +24,6 @@ export default function AnchorMasterPage() {
             </div>
             <div className="flex items-center gap-2 ml-auto">
               <Button variant="outline" size="sm">
-                Export
-              </Button>
-              <Button variant="outline" size="sm">
                 Filter
               </Button>
             </div>
@@ -68,10 +65,6 @@ export default function AnchorMasterPage() {
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-2">
                         <EditAnchorDialog anchor={anchor} />
-                        <Button variant="ghost" size="icon">
-                          <Trash2 className="h-4 w-4" />
-                          <span className="sr-only">Delete anchor</span>
-                        </Button>
                       </div>
                     </TableCell>
                   </TableRow>
@@ -162,4 +155,3 @@ const anchors: Anchor[] = [
     ]
   },
 ]
-

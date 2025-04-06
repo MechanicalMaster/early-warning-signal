@@ -25,7 +25,6 @@ export default function AnchorExpiryPage() {
                 <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input placeholder="Search anchors..." className="pl-8" />
               </div>
-              <Button>Export</Button>
             </div>
           </div>
         </CardHeader>
@@ -107,4 +106,4 @@ const anchorData = [
     expiryDate: "2024-06-30",
     daysToExpiry: 31,
   },
-] 
+]

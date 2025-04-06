@@ -26,7 +26,6 @@ export default function ProgramReviewPage() {
                 <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input placeholder="Search anchors..." className="pl-8" />
               </div>
-              <Button>Export</Button>
             </div>
           </div>
         </CardHeader>
@@ -132,4 +131,4 @@ const programData = [
     overdueDealers: 4,
     overduePercentage: 6,
   },
-] 
+]

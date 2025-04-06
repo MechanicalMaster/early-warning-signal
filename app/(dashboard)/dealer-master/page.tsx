@@ -25,9 +25,6 @@ export default function DealerMasterPage() {
             </div>
             <div className="flex items-center gap-2 ml-auto">
               <Button variant="outline" size="sm">
-                Export
-              </Button>
-              <Button variant="outline" size="sm">
                 Filter
               </Button>
             </div>
@@ -70,12 +67,6 @@ export default function DealerMasterPage() {
                     </TableCell>
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-2">
-                        <Button variant="ghost" size="icon" asChild>
-                          <Link href={`/dealer-master/${dealer.id}`}>
-                            <Eye className="h-4 w-4" />
-                            <span className="sr-only">View dealer</span>
-                          </Link>
-                        </Button>
                         <EditDealerDialog dealer={dealer} />
                       </div>
                     </TableCell>
@@ -137,4 +128,3 @@ const dealers: Dealer[] = [
     status: "Active",
   },
 ]
-

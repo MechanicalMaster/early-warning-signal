@@ -23,42 +23,6 @@ export default function StopSupplyPage() {
         <p className="text-muted-foreground">Monitor and manage dealers with stop supply status</p>
       </div>
 
-      <div className="grid gap-4 grid-cols-1 md:grid-cols-3">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Total Stop Supply</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{stopSupplyDealers.length}</div>
-            <p className="text-xs text-muted-foreground">Active stop supply cases</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Total Overdue Amount</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              ₹ {stopSupplyDealers.reduce((sum, dealer) => sum + dealer.overdueAmount, 0).toLocaleString()}
-            </div>
-            <p className="text-xs text-muted-foreground">Across all stop supply dealers</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Average Overdue Days</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              {Math.round(
-                stopSupplyDealers.reduce((sum, dealer) => sum + dealer.overdueDays, 0) / stopSupplyDealers.length,
-              )}
-            </div>
-            <p className="text-xs text-muted-foreground">Days past payment due date</p>
-          </CardContent>
-        </Card>
-      </div>
-
       <Card>
         <CardHeader className="p-4">
           <div className="flex flex-col sm:flex-row sm:items-center gap-4">
@@ -84,9 +48,6 @@ export default function StopSupplyPage() {
               <Button variant="outline" size="sm" className="gap-2" onClick={() => setShowFilters(!showFilters)}>
                 <Filter className="h-4 w-4" />
                 Filters
-              </Button>
-              <Button variant="outline" size="sm">
-                Export
               </Button>
             </div>
           </div>
@@ -170,10 +131,6 @@ export default function StopSupplyPage() {
                     <TableCell>{dealer.lastTriggeredDate}</TableCell>
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-2">
-                        <Button variant="outline" size="sm" className="gap-2">
-                          <CheckCircle2 className="h-4 w-4" />
-                          Lift Stop
-                        </Button>
                         <Button
                           variant="ghost"
                           size="icon"
@@ -445,4 +402,3 @@ const stopSupplyDealers: StopSupplyDealer[] = [
     ],
   },
 ]
-

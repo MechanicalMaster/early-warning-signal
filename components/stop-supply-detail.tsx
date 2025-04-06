@@ -89,7 +89,6 @@ export function StopSupplyDetail({ dealer }: { dealer: StopSupplyDealer }) {
                     <TableHead>Triggered Date</TableHead>
                     <TableHead>Emails Sent</TableHead>
                     <TableHead>Anchor Confirmation</TableHead>
-                    <TableHead>Attachments</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -121,14 +120,6 @@ export function StopSupplyDetail({ dealer }: { dealer: StopSupplyDealer }) {
                             <span>Pending</span>
                           </div>
                         )}
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-1">
-                          <span>{item.attachments.length}</span>
-                          <Button variant="ghost" size="icon">
-                            <FileText className="h-4 w-4" />
-                          </Button>
-                        </div>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -202,4 +193,3 @@ export function StopSupplyDetail({ dealer }: { dealer: StopSupplyDealer }) {
     </div>
   )
 }
-

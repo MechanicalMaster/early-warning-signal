@@ -15,41 +15,10 @@ export default function DealerStatusPage() {
         <p className="text-muted-foreground">Manage active and inactive dealers</p>
       </div>
 
-      <div className="grid gap-4 grid-cols-1 md:grid-cols-3">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Total Dealers</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">125</div>
-            <p className="text-xs text-muted-foreground">Across all anchors</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Active Dealers</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">98</div>
-            <p className="text-xs text-muted-foreground">78.4% of total dealers</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Inactive Dealers</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">27</div>
-            <p className="text-xs text-muted-foreground">21.6% of total dealers</p>
-          </CardContent>
-        </Card>
-      </div>
-
       <Tabs defaultValue="all" className="space-y-4">
         <div className="flex items-center justify-between">
           <TabsList>
             <TabsTrigger value="all">All Dealers</TabsTrigger>
-            <TabsTrigger value="active">Active</TabsTrigger>
             <TabsTrigger value="inactive">Inactive</TabsTrigger>
           </TabsList>
           <div className="flex items-center gap-2">
@@ -74,11 +43,6 @@ export default function DealerStatusPage() {
               <div className="flex items-center gap-2 w-full max-w-sm">
                 <Search className="h-4 w-4 text-muted-foreground" />
                 <Input placeholder="Search dealers..." className="h-9" />
-              </div>
-              <div className="flex items-center gap-2 ml-auto">
-                <Button variant="outline" size="sm">
-                  Export
-                </Button>
               </div>
             </div>
           </CardHeader>
@@ -191,4 +155,3 @@ const dealerStatusData: Dealer[] = [
     utilisationPercentage: 90,
   },
 ]
-

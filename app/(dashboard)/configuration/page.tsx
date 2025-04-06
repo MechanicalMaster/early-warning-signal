@@ -24,6 +24,10 @@ export default function ConfigurationPage() {
             <Shield className="h-4 w-4 mr-2" />
             FLDG Rules
           </TabsTrigger>
+          <TabsTrigger value="review">
+            <Shield className="h-4 w-4 mr-2" />
+            Review Rules
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="stop-supply" className="space-y-4">
@@ -120,10 +124,6 @@ export default function ConfigurationPage() {
                           <Input type="number" defaultValue="100000" />
                         </div>
                       </div>
-                    </div>
-                    <div className="space-y-2">
-                      <Label>FLDG Days</Label>
-                      <Input type="number" defaultValue="30" />
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="space-y-0.5">
@@ -222,8 +222,73 @@ export default function ConfigurationPage() {
             </CardFooter>
           </Card>
         </TabsContent>
+      <TabsContent value="review" className="space-y-4">
+        <Card>
+          <CardHeader>
+            <CardTitle>Program Review Rules</CardTitle>
+            <CardDescription>Configure parameters for program review alerts and thresholds</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-4">
+              <div className="border rounded-lg p-4">
+                <h3 className="text-lg font-semibold mb-4">Rule 1</h3>
+                <div className="grid gap-4 md:grid-cols-3">
+                  <div className="space-y-2">
+                    <Label>Overdue Dealers Threshold</Label>
+                    <Input type="number" defaultValue="5" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Overdue Percentage Threshold</Label>
+                    <Input type="number" defaultValue="10" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Utilisation Percentage Threshold</Label>
+                    <Input type="number" defaultValue="80" />
+                  </div>
+                </div>
+              </div>
+              <div className="border rounded-lg p-4">
+                <h3 className="text-lg font-semibold mb-4">Rule 2</h3>
+                <div className="grid gap-4 md:grid-cols-3">
+                  <div className="space-y-2">
+                    <Label>Overdue Dealers Threshold</Label>
+                    <Input type="number" defaultValue="5" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Overdue Percentage Threshold</Label>
+                    <Input type="number" defaultValue="10" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Utilisation Percentage Threshold</Label>
+                    <Input type="number" defaultValue="80" />
+                  </div>
+                </div>
+              </div>
+              <div className="border rounded-lg p-4">
+                <h3 className="text-lg font-semibold mb-4">Rule 3</h3>
+                <div className="grid gap-4 md:grid-cols-3">
+                  <div className="space-y-2">
+                    <Label>Overdue Dealers Threshold</Label>
+                    <Input type="number" defaultValue="5" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Overdue Percentage Threshold</Label>
+                    <Input type="number" defaultValue="10" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Utilisation Percentage Threshold</Label>
+                    <Input type="number" defaultValue="80" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+          <CardFooter>
+            <Button>Save Changes</Button>
+          </CardFooter>
+        </Card>
+      </TabsContent>
       </Tabs>
     </div>
   )
 }
-

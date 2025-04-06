@@ -6,6 +6,43 @@ import { Search, Shield, Download, Eye, FileText, AlertTriangle } from "lucide-r
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+
+function FLDGHistoryDialog({ dealer }: { dealer: any }) {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="ghost" size="icon">
+          <Eye className="h-4 w-4" />
+          <span className="sr-only">View FLDG History</span>
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-2xl">
+        <DialogHeader>
+          <DialogTitle>FLDG Invocation History - {dealer.dealerName}</DialogTitle>
+        </DialogHeader>
+        <div className="space-y-4">
+          <div>
+            <h3 className="font-semibold mb-2">Invocation History</h3>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>2023-10-30: Invoked for ₹ 200,000</li>
+              <li>2023-09-15: Invoked for ₹ 150,000</li>
+              <li>2023-08-01: Invoked for ₹ 100,000</li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-semibold mb-2">Emails Sent</h3>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>2023-10-30: Email sent to dealer and anchor</li>
+              <li>2023-09-15: Reminder email sent</li>
+              <li>2023-08-01: Initial invocation email sent</li>
+            </ul>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  )
+}
 
 export default function FLDGViewPage() {
   return (
@@ -13,38 +50,6 @@ export default function FLDGViewPage() {
       <div>
         <h1 className="text-2xl md:text-3xl font-bold tracking-tight">FLDG View</h1>
         <p className="text-muted-foreground">Monitor First Loss Default Guarantee status across anchors</p>
-      </div>
-
-      <div className="grid gap-4 grid-cols-1 md:grid-cols-3">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Total FLDG Amount</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">₹ 25,000,000</div>
-            <p className="text-xs text-muted-foreground">Across all anchors</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Utilized FLDG</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">₹ 8,750,000</div>
-            <p className="text-xs text-muted-foreground">35% of total FLDG</p>
-            <Progress value={35} className="h-2 mt-2" />
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Available FLDG</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">₹ 16,250,000</div>
-            <p className="text-xs text-muted-foreground">65% of total FLDG</p>
-            <Progress value={65} className="h-2 mt-2" />
-          </CardContent>
-        </Card>
       </div>
 
       <Tabs defaultValue="dealers">
@@ -102,18 +107,7 @@ export default function FLDGViewPage() {
                         <TableCell>{item.lastInvocation || "N/A"}</TableCell>
                         <TableCell className="text-right">
                           <div className="flex justify-end gap-2">
-                            <Button variant="ghost" size="icon">
-                              <Eye className="h-4 w-4" />
-                              <span className="sr-only">View Details</span>
-                            </Button>
-                            <Button variant="ghost" size="icon">
-                              <FileText className="h-4 w-4" />
-                              <span className="sr-only">Generate Report</span>
-                            </Button>
-                            <Button variant="ghost" size="icon">
-                              <AlertTriangle className="h-4 w-4" />
-                              <span className="sr-only">Invoke FLDG</span>
-                            </Button>
+                            <FLDGHistoryDialog dealer={item} />
                           </div>
                         </TableCell>
                       </TableRow>
@@ -284,4 +278,3 @@ const dealerFldgData = [
     lastInvocation: null,
   },
 ]
-

@@ -218,9 +218,9 @@ const masterItems: NavItem[] = [
 ];
 
 const monitoringItems: NavItem[] = [
-  { name: "Stop Supply", href: "/stop-supply", icon: AlertOctagon, badge: "3" },
+  { name: "Stop Supply", href: "/stop-supply", icon: AlertOctagon },
   { name: "FLDG View", href: "/fldg-view", icon: Shield },
-  { name: "Dealer Status", href: "/dealer-status", icon: Store },
+  { name: "Credit Noting", href: "/dealer-status", icon: Store },
   { name: "Anchor Expiry", href: "/anchor-expiry", icon: Clock },
   { name: "Program Review", href: "/program-review", icon: BarChart },
 ];
@@ -229,6 +229,7 @@ const adminItems: NavItem[] = [
   { name: "Reports", href: "/reports", icon: FileText },
   { name: "Templates", href: "/templates", icon: Mail },
   { name: "Configuration", href: "/configuration", icon: Sliders },
+  { name: "Data Sync", href: "/data-sync", icon: Sliders },
 ];
 
 const footerItems: FooterItem[] = [
@@ -240,4 +241,3 @@ const footerItems: FooterItem[] = [
     onClick: () => logout()
   },
 ];
-
