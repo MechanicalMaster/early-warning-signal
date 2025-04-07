@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -7,6 +9,8 @@ import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Switch } from "@/components/ui/switch"
+import { useState } from "react"
 
 function FLDGHistoryDialog({ dealer }: { dealer: any }) {
   return (
@@ -45,6 +49,20 @@ function FLDGHistoryDialog({ dealer }: { dealer: any }) {
 }
 
 export default function FLDGViewPage() {
+  const [dealerStatuses, setDealerStatuses] = useState(
+    dealerFldgData.reduce((acc, dealer) => ({
+      ...acc,
+      [dealer.dealerId]: dealer.isInvoked || false
+    }), {} as Record<string, boolean>)
+  )
+
+  const handleInvocationToggle = (dealerId: string) => {
+    setDealerStatuses(prev => ({
+      ...prev,
+      [dealerId]: !prev[dealerId]
+    }))
+  }
+
   return (
     <div className="flex flex-col gap-4">
       <div>
@@ -86,6 +104,7 @@ export default function FLDGViewPage() {
                       <TableHead>Overdue Amount</TableHead>
                       <TableHead>FLDG Invocation Days</TableHead>
                       <TableHead>Last Invocation</TableHead>
+                      <TableHead>FLDG Invoked</TableHead>
                       <TableHead className="text-right">Actions</TableHead>
                     </TableRow>
                   </TableHeader>
@@ -105,6 +124,12 @@ export default function FLDGViewPage() {
                         <TableCell>₹ {item.overdueAmount.toLocaleString()}</TableCell>
                         <TableCell>{item.fldgInvocationDays} days</TableCell>
                         <TableCell>{item.lastInvocation || "N/A"}</TableCell>
+                        <TableCell>
+                          <Switch
+                            checked={dealerStatuses[item.dealerId]}
+                            onCheckedChange={() => handleInvocationToggle(item.dealerId)}
+                          />
+                        </TableCell>
                         <TableCell className="text-right">
                           <div className="flex justify-end gap-2">
                             <FLDGHistoryDialog dealer={item} />
@@ -231,6 +256,7 @@ const dealerFldgData = [
     overdueAmount: 850000,
     fldgInvocationDays: 15,
     lastInvocation: "2023-10-30",
+    isInvoked: true,
   },
   {
     dealerId: "DLR-10043",
@@ -240,6 +266,7 @@ const dealerFldgData = [
     overdueAmount: 325000,
     fldgInvocationDays: 5,
     lastInvocation: null,
+    isInvoked: false,
   },
   {
     dealerId: "DLR-10067",
@@ -249,6 +276,7 @@ const dealerFldgData = [
     overdueAmount: 480000,
     fldgInvocationDays: 0,
     lastInvocation: null,
+    isInvoked: false,
   },
   {
     dealerId: "DLR-10082",
@@ -258,6 +286,7 @@ const dealerFldgData = [
     overdueAmount: 275000,
     fldgInvocationDays: 0,
     lastInvocation: null,
+    isInvoked: false,
   },
   {
     dealerId: "DLR-10091",
@@ -267,6 +296,7 @@ const dealerFldgData = [
     overdueAmount: 650000,
     fldgInvocationDays: 30,
     lastInvocation: "2023-11-01",
+    isInvoked: true,
   },
   {
     dealerId: "DLR-10105",
@@ -276,5 +306,6 @@ const dealerFldgData = [
     overdueAmount: 120000,
     fldgInvocationDays: 0,
     lastInvocation: null,
+    isInvoked: false,
   },
 ]

@@ -2,8 +2,23 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Search, Trash2 } from "lucide-react"
-import { EditAnchorDialog, type Anchor } from "@/components/edit-anchor-dialog"
+import { Search, Edit } from "lucide-react"
+import Link from "next/link"
+
+export type Anchor = {
+  id: string
+  name: string
+  industry: string
+  contactPerson: string
+  email: string
+  status: string
+  phone?: string
+  address?: string
+  psmEmail?: string
+  anchorEmails?: string[]
+  stopSupplyRule?: string
+  fldgInvocationRule?: string
+}
 
 export default function AnchorMasterPage() {
   return (
@@ -64,7 +79,12 @@ export default function AnchorMasterPage() {
                     </TableCell>
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-2">
-                        <EditAnchorDialog anchor={anchor} />
+                        <Link href={`/anchor-master/${anchor.id}`}>
+                          <Button variant="ghost" size="icon">
+                            <Edit className="h-4 w-4" />
+                            <span className="sr-only">Edit {anchor.name}</span>
+                          </Button>
+                        </Link>
                       </div>
                     </TableCell>
                   </TableRow>
@@ -153,5 +173,5 @@ const anchors: Anchor[] = [
       "claims@discovery.co.za",
       "support@discovery.co.za"
     ]
-  },
+  }
 ]

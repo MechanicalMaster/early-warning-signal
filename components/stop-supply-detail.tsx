@@ -8,8 +8,14 @@ import { Button } from "@/components/ui/button"
 import { AlertTriangle, CheckCircle, XCircle, FileText, Mail, Calendar, Download, ExternalLink } from "lucide-react"
 import type { StopSupplyDealer } from "@/app/(dashboard)/stop-supply/page"
 import { Progress } from "@/components/ui/progress"
+import { Switch } from "@/components/ui/switch"
+import { useState } from "react"
 
 export function StopSupplyDetail({ dealer }: { dealer: StopSupplyDealer }) {
+  const [anchorConfirmation, setAnchorConfirmation] = useState(false)
+  const [stopEmails, setStopEmails] = useState(false)
+  const currentInvoice = dealer.history[0] // Most recent invoice
+
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -61,8 +67,12 @@ export function StopSupplyDetail({ dealer }: { dealer: StopSupplyDealer }) {
         </Card>
       </div>
 
-      <Tabs defaultValue="history" className="space-y-4">
+      <Tabs defaultValue="current-thread" className="space-y-4">
         <TabsList>
+          <TabsTrigger value="current-thread">
+            <AlertTriangle className="h-4 w-4 mr-2" />
+            Current Stop Supply Thread
+          </TabsTrigger>
           <TabsTrigger value="history">
             <Calendar className="h-4 w-4 mr-2" />
             Stop Supply History
@@ -72,6 +82,70 @@ export function StopSupplyDetail({ dealer }: { dealer: StopSupplyDealer }) {
             Communications
           </TabsTrigger>
         </TabsList>
+
+        <TabsContent value="current-thread" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Current Stop Supply Thread</CardTitle>
+              <CardDescription>Manage the current stop supply process</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="border rounded-lg p-4">
+                <h3 className="text-base font-semibold mb-4">Active Invoice Details</h3>
+                <dl className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <dt className="font-medium text-muted-foreground">Invoice Number</dt>
+                    <dd className="mt-1">{currentInvoice.invoiceNumber}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-medium text-muted-foreground">Overdue Amount</dt>
+                    <dd className="mt-1">₹ {currentInvoice.overdueAmount.toLocaleString()}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-medium text-muted-foreground">Overdue Days</dt>
+                    <dd className="mt-1">{currentInvoice.overdueDays} days</dd>
+                  </div>
+                  <div>
+                    <dt className="font-medium text-muted-foreground">Emails Sent</dt>
+                    <dd className="mt-1">{currentInvoice.emailsSent}</dd>
+                  </div>
+                </dl>
+              </div>
+
+              <div className="border rounded-lg p-4 space-y-4">
+                <h3 className="text-base font-semibold">Stop Supply Controls</h3>
+                
+                <div className="flex items-center justify-between">
+                  <div className="space-y-0.5">
+                    <h4 className="font-medium">Anchor Confirmation Received</h4>
+                    <p className="text-sm text-muted-foreground">Mark if anchor has confirmed the stop supply</p>
+                  </div>
+                  <Switch 
+                    checked={anchorConfirmation}
+                    onCheckedChange={setAnchorConfirmation}
+                  />
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="space-y-0.5">
+                    <h4 className="font-medium">Stop Sending Stop Supply Emails</h4>
+                    <p className="text-sm text-muted-foreground">Pause the automated email notifications</p>
+                  </div>
+                  <Switch 
+                    checked={stopEmails}
+                    onCheckedChange={setStopEmails}
+                  />
+                </div>
+
+                <div className="pt-4">
+                  <Button className="w-full" variant="secondary">
+                    Save Changes
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
 
         <TabsContent value="history" className="space-y-4">
           <Card>

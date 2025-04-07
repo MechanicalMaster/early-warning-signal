@@ -113,22 +113,24 @@ export default function ConfigurationPage() {
                   <h3 className="text-lg font-semibold mb-4">Rule 1</h3>
                   <div className="grid gap-4">
                     <div className="space-y-2">
-                      <Label>Amount Range</Label>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label>Minimum (₹)</Label>
-                          <Input type="number" defaultValue="0" />
-                        </div>
-                        <div className="space-y-2">
-                          <Label>Maximum (₹)</Label>
-                          <Input type="number" defaultValue="100000" />
-                        </div>
-                      </div>
+                      <Label>Minimum FLDG Invocation Amount (Per Dealer)</Label>
+                      <Input type="number" defaultValue="0" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label>FLDG Days</Label>
+                      <Input type="number" defaultValue="30" />
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="space-y-0.5">
-                        <Label>Auto Invocation</Label>
-                        <p className="text-sm text-muted-foreground">Automatically invoke FLDG after days elapse</p>
+                        <Label>Pre Reminder Email</Label>
+                        <p className="text-sm text-muted-foreground">Send reminder email before FLDG invocation</p>
+                      </div>
+                      <Switch defaultChecked />
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="space-y-0.5">
+                        <Label>Post Reminder Email</Label>
+                        <p className="text-sm text-muted-foreground">Send reminder email after FLDG invocation</p>
                       </div>
                       <Switch defaultChecked />
                     </div>
@@ -146,17 +148,8 @@ export default function ConfigurationPage() {
                   <h3 className="text-lg font-semibold mb-4">Rule 2</h3>
                   <div className="grid gap-4">
                     <div className="space-y-2">
-                      <Label>Amount Range</Label>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label>Minimum (₹)</Label>
-                          <Input type="number" defaultValue="100001" />
-                        </div>
-                        <div className="space-y-2">
-                          <Label>Maximum (₹)</Label>
-                          <Input type="number" defaultValue="500000" />
-                        </div>
-                      </div>
+                      <Label>Minimum FLDG Invocation Amount (Per Dealer)</Label>
+                      <Input type="number" defaultValue="100001" />
                     </div>
                     <div className="space-y-2">
                       <Label>FLDG Days</Label>
@@ -164,8 +157,15 @@ export default function ConfigurationPage() {
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="space-y-0.5">
-                        <Label>Auto Invocation</Label>
-                        <p className="text-sm text-muted-foreground">Automatically invoke FLDG after days elapse</p>
+                        <Label>Pre Reminder Email</Label>
+                        <p className="text-sm text-muted-foreground">Send reminder email before FLDG invocation</p>
+                      </div>
+                      <Switch defaultChecked />
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="space-y-0.5">
+                        <Label>Post Reminder Email</Label>
+                        <p className="text-sm text-muted-foreground">Send reminder email after FLDG invocation</p>
                       </div>
                       <Switch defaultChecked />
                     </div>
@@ -183,17 +183,8 @@ export default function ConfigurationPage() {
                   <h3 className="text-lg font-semibold mb-4">Rule 3</h3>
                   <div className="grid gap-4">
                     <div className="space-y-2">
-                      <Label>Amount Range</Label>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label>Minimum (₹)</Label>
-                          <Input type="number" defaultValue="500001" />
-                        </div>
-                        <div className="space-y-2">
-                          <Label>Maximum (₹)</Label>
-                          <Input type="number" defaultValue="1000000" />
-                        </div>
-                      </div>
+                      <Label>Minimum FLDG Invocation Amount (Per Dealer)</Label>
+                      <Input type="number" defaultValue="500001" />
                     </div>
                     <div className="space-y-2">
                       <Label>FLDG Days</Label>
@@ -201,8 +192,15 @@ export default function ConfigurationPage() {
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="space-y-0.5">
-                        <Label>Auto Invocation</Label>
-                        <p className="text-sm text-muted-foreground">Automatically invoke FLDG after days elapse</p>
+                        <Label>Pre Reminder Email</Label>
+                        <p className="text-sm text-muted-foreground">Send reminder email before FLDG invocation</p>
+                      </div>
+                      <Switch defaultChecked />
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="space-y-0.5">
+                        <Label>Post Reminder Email</Label>
+                        <p className="text-sm text-muted-foreground">Send reminder email after FLDG invocation</p>
                       </div>
                       <Switch defaultChecked />
                     </div>
@@ -245,6 +243,18 @@ export default function ConfigurationPage() {
                     <Label>Utilisation Percentage Threshold</Label>
                     <Input type="number" defaultValue="80" />
                   </div>
+                  <div className="space-y-2">
+                    <Label>NPA Percentage</Label>
+                    <Input type="number" defaultValue="5" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Dealer Sanctioned Limit</Label>
+                    <Input type="number" defaultValue="1000000" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Number of live dealers</Label>
+                    <Input type="number" defaultValue="50" />
+                  </div>
                 </div>
               </div>
               <div className="border rounded-lg p-4">
@@ -262,6 +272,18 @@ export default function ConfigurationPage() {
                     <Label>Utilisation Percentage Threshold</Label>
                     <Input type="number" defaultValue="80" />
                   </div>
+                  <div className="space-y-2">
+                    <Label>NPA Percentage</Label>
+                    <Input type="number" defaultValue="5" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Dealer Sanctioned Limit</Label>
+                    <Input type="number" defaultValue="1000000" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Number of live dealers</Label>
+                    <Input type="number" defaultValue="50" />
+                  </div>
                 </div>
               </div>
               <div className="border rounded-lg p-4">
@@ -278,6 +300,18 @@ export default function ConfigurationPage() {
                   <div className="space-y-2">
                     <Label>Utilisation Percentage Threshold</Label>
                     <Input type="number" defaultValue="80" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>NPA Percentage</Label>
+                    <Input type="number" defaultValue="5" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Dealer Sanctioned Limit</Label>
+                    <Input type="number" defaultValue="1000000" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Number of live dealers</Label>
+                    <Input type="number" defaultValue="50" />
                   </div>
                 </div>
               </div>
