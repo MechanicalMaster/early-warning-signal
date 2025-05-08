@@ -80,10 +80,10 @@ export default function AnchorMasterPage() {
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-2">
                         <Link href={`/anchor-master/${anchor.id}`}>
-                          <Button variant="ghost" size="icon">
-                            <Edit className="h-4 w-4" />
+                        <Button variant="ghost" size="icon">
+                          <Edit className="h-4 w-4" />
                             <span className="sr-only">Edit {anchor.name}</span>
-                          </Button>
+                        </Button>
                         </Link>
                       </div>
                     </TableCell>

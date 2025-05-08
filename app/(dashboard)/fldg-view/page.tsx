@@ -77,7 +77,7 @@ export default function FLDGViewPage() {
         </TabsList>
         
         <TabsContent value="dealers">
-          <Card>
+        <Card>
             <CardHeader className="p-4">
               <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                 <div className="flex items-center gap-2 w-full max-w-sm">
@@ -91,7 +91,7 @@ export default function FLDGViewPage() {
                   </Button>
                 </div>
               </div>
-            </CardHeader>
+          </CardHeader>
             <CardContent className="p-0 overflow-auto">
               <div className="w-full min-w-[1000px]">
                 <Table>
@@ -140,72 +140,72 @@ export default function FLDGViewPage() {
                   </TableBody>
                 </Table>
               </div>
-            </CardContent>
-          </Card>
+          </CardContent>
+        </Card>
         </TabsContent>
         
         <TabsContent value="anchors">
-          <Card>
-            <CardHeader className="p-4">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-                <div className="flex items-center gap-2 w-full max-w-sm">
-                  <Search className="h-4 w-4 text-muted-foreground" />
-                  <Input placeholder="Search anchors..." className="h-9" />
-                </div>
-                <div className="flex items-center gap-2 ml-auto">
-                  <Button variant="outline" size="sm">
-                    <Download className="h-4 w-4 mr-2" />
-                    Export
-                  </Button>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent className="p-0 overflow-auto">
-              <div className="w-full min-w-[640px]">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Anchor</TableHead>
-                      <TableHead>FLDG Amount</TableHead>
-                      <TableHead>Utilized</TableHead>
-                      <TableHead>Available</TableHead>
-                      <TableHead>Utilization %</TableHead>
-                      <TableHead>Last Updated</TableHead>
-                      <TableHead className="text-right">Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {fldgData.map((item) => (
-                      <TableRow key={item.anchor}>
-                        <TableCell className="font-medium">
-                          <div className="flex items-center gap-2">
-                            <Shield className="h-4 w-4 text-primary" />
-                            {item.anchor}
-                          </div>
-                        </TableCell>
+      <Card>
+        <CardHeader className="p-4">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="flex items-center gap-2 w-full max-w-sm">
+              <Search className="h-4 w-4 text-muted-foreground" />
+              <Input placeholder="Search anchors..." className="h-9" />
+            </div>
+            <div className="flex items-center gap-2 ml-auto">
+              <Button variant="outline" size="sm">
+                <Download className="h-4 w-4 mr-2" />
+                Export
+              </Button>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent className="p-0 overflow-auto">
+          <div className="w-full min-w-[640px]">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Anchor</TableHead>
+                  <TableHead>FLDG Amount</TableHead>
+                  <TableHead>Utilized</TableHead>
+                  <TableHead>Available</TableHead>
+                  <TableHead>Utilization %</TableHead>
+                  <TableHead>Last Updated</TableHead>
+                  <TableHead className="text-right">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {fldgData.map((item) => (
+                  <TableRow key={item.anchor}>
+                    <TableCell className="font-medium">
+                      <div className="flex items-center gap-2">
+                        <Shield className="h-4 w-4 text-primary" />
+                        {item.anchor}
+                      </div>
+                    </TableCell>
                         <TableCell>₹ {item.totalAmount.toLocaleString()}</TableCell>
                         <TableCell>₹ {item.utilized.toLocaleString()}</TableCell>
                         <TableCell>₹ {item.available.toLocaleString()}</TableCell>
-                        <TableCell>
-                          <div className="flex items-center gap-2">
-                            <Progress value={item.utilizationPercentage} className="h-2 w-20" />
-                            <span>{item.utilizationPercentage}%</span>
-                          </div>
-                        </TableCell>
-                        <TableCell>{item.lastUpdated}</TableCell>
-                        <TableCell className="text-right">
-                          <Button variant="ghost" size="sm" className="gap-2">
-                            <Eye className="h-4 w-4" />
-                            Details
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </CardContent>
-          </Card>
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        <Progress value={item.utilizationPercentage} className="h-2 w-20" />
+                        <span>{item.utilizationPercentage}%</span>
+                      </div>
+                    </TableCell>
+                    <TableCell>{item.lastUpdated}</TableCell>
+                    <TableCell className="text-right">
+                      <Button variant="ghost" size="sm" className="gap-2">
+                        <Eye className="h-4 w-4" />
+                        Details
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
         </TabsContent>
       </Tabs>
     </div>
