@@ -10,10 +10,12 @@ import type { StopSupplyDealer } from "@/app/(dashboard)/stop-supply/page"
 import { Progress } from "@/components/ui/progress"
 import { Switch } from "@/components/ui/switch"
 import { useState } from "react"
+import { DatePicker } from "@/components/ui/date-picker"
 
 export function StopSupplyDetail({ dealer }: { dealer: StopSupplyDealer }) {
   const [anchorConfirmation, setAnchorConfirmation] = useState(false)
   const [stopEmails, setStopEmails] = useState(false)
+  const [confirmationDate, setConfirmationDate] = useState<Date | undefined>(undefined)
   const currentInvoice = dealer.history[0] // Most recent invoice
 
   return (
@@ -123,6 +125,16 @@ export function StopSupplyDetail({ dealer }: { dealer: StopSupplyDealer }) {
                   <Switch 
                     checked={anchorConfirmation}
                     onCheckedChange={setAnchorConfirmation}
+                  />
+                </div>
+
+                <div className={`space-y-2 ${anchorConfirmation ? "" : "opacity-50 pointer-events-none"}`}>
+                  <h4 className="font-medium">Confirmation Date</h4>
+                  <DatePicker
+                    selected={confirmationDate}
+                    onSelect={setConfirmationDate}
+                    placeholder="Select confirmation date"
+                    disabled={!anchorConfirmation}
                   />
                 </div>
 
@@ -236,18 +248,12 @@ export function StopSupplyDetail({ dealer }: { dealer: StopSupplyDealer }) {
                         Email sent to {dealer.name} regarding overdue payment for invoice {item.invoiceNumber}.
                         {emailIndex > 0 && " This is a follow-up reminder."}
                       </p>
-                      <div className="flex items-center gap-2 text-sm">
-                        <Button variant="outline" size="sm" className="gap-2">
-                          <Mail className="h-4 w-4" />
-                          View Email
-                        </Button>
-                        {item.anchorConfirmation && emailIndex === item.emailsSent - 1 && (
-                          <div className="flex items-center gap-1 text-green-600">
-                            <CheckCircle className="h-4 w-4" />
-                            <span>Anchor Confirmed</span>
-                          </div>
-                        )}
-                      </div>
+                      {item.anchorConfirmation && emailIndex === item.emailsSent - 1 && (
+                        <div className="flex items-center gap-1 text-green-600">
+                          <CheckCircle className="h-4 w-4" />
+                          <span>Anchor Confirmed</span>
+                        </div>
+                      )}
                     </CardContent>
                   </Card>
                 )),
