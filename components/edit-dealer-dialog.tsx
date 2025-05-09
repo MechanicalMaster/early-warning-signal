@@ -33,11 +33,13 @@ export function EditDealerDialog({ dealer }: { dealer: Dealer }) {
   const [open, setOpen] = useState(false)
   const [formData, setFormData] = useState<Dealer & { 
     statusReason?: string
-    comments?: string 
+    comments?: string
+    attachment?: File | null
   }>({ 
     ...dealer,
     statusReason: "",
-    comments: ""
+    comments: "",
+    attachment: null
   })
   const [previousStatus, setPreviousStatus] = useState(dealer.status)
 
@@ -46,13 +48,19 @@ export function EditDealerDialog({ dealer }: { dealer: Dealer }) {
     setFormData((prev) => ({ ...prev, [id]: value }))
   }
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null
+    setFormData((prev) => ({ ...prev, attachment: file }))
+  }
+
   const handleSelectChange = (field: string, value: string) => {
     if (field === "status") {
       setFormData((prev) => ({ 
         ...prev, 
         [field]: value,
         statusReason: "",
-        comments: ""
+        comments: "",
+        attachment: null
       }))
       setPreviousStatus(value)
     } else {
@@ -72,6 +80,11 @@ export function EditDealerDialog({ dealer }: { dealer: Dealer }) {
         alert("Please provide comments for changing the dealer status")
         return
       }
+      // Optional: Check for attachment if required for status change
+      // if (!formData.attachment) {
+      //   alert("Please attach a document for status change")
+      //   return
+      // }
     }
     // In a real app, you would submit the form data to your API
     console.log("Updated dealer data:", formData)
@@ -116,8 +129,8 @@ export function EditDealerDialog({ dealer }: { dealer: Dealer }) {
                 id="sanctionedLimit" 
                 type="number" 
                 value={formData.sanctionedLimit} 
-                onChange={handleChange}
-                required 
+                disabled // Made non-editable
+                className="bg-muted" // Added styling for disabled state
               />
             </div>
 
@@ -202,6 +215,17 @@ export function EditDealerDialog({ dealer }: { dealer: Dealer }) {
                     required
                   />
                 </div>
+
+                {/* Added Attachment Field */}
+                <div className="space-y-2">
+                  <Label htmlFor="attachment">Attachment</Label>
+                  <Input 
+                    id="attachment" 
+                    type="file" 
+                    onChange={handleFileChange}
+                  />
+                </div>
+
               </>
             )}
           </div>
@@ -215,4 +239,4 @@ export function EditDealerDialog({ dealer }: { dealer: Dealer }) {
       </DialogContent>
     </Dialog>
   )
-} 
+}
