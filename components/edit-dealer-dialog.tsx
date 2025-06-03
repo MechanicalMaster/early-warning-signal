@@ -22,10 +22,14 @@ export type Dealer = {
   id: string
   name: string
   anchor: string
+  dealerCustId: string
+  programName: string
+  programCustId: string
   sanctionedLimit: number
   utilisedLimit: number
   utilisationPercentage: number
   status: string
+  smartfinStatus: "Active" | "Inactive"
   lastUpdated: string
 }
 
