@@ -36,11 +36,11 @@ export function StopSupplyDetail({ dealer }: { dealer: StopSupplyDealer }) {
               <dt className="font-medium">Anchor:</dt>
               <dd>{dealer.anchor}</dd>
 
-              <dt className="font-medium">Stop Reason:</dt>
-              <dd className="flex items-center gap-1">
-                <AlertTriangle className="h-3 w-3 text-red-500" />
-                {dealer.stopReason}
-              </dd>
+              <dt className="font-medium">Program Name:</dt>
+              <dd>{dealer.programName}</dd>
+              
+              <dt className="font-medium">Program Cust ID:</dt>
+              <dd>{dealer.programCustId}</dd>
             </dl>
           </CardContent>
         </Card>
