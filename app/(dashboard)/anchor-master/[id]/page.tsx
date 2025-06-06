@@ -18,11 +18,13 @@ export default function EditAnchorPage({ params }: { params: Promise<{ id: strin
     name: "Sample Anchor",
     industry: "Banking",
     status: "Active",
-    contactPerson: "John Smith",
-    email: "john.smith@example.com",
+    psmName: "John Smith",
+    programName: "Sample Program",
+    programCustId: "PRG-SA-001",
+    anchorCustId: "ANC12345",
+    region: "Mumbai",
     phone: "+1234567890",
     address: "123 Main St",
-    psmEmail: "psm@example.com",
     anchorEmails: ["contact@example.com"],
     stopSupplyRule: "rule1",
     fldgInvocationRule: "standard",
@@ -80,6 +82,50 @@ export default function EditAnchorPage({ params }: { params: Promise<{ id: strin
               </div>
 
               <div className="space-y-2">
+                <Label htmlFor="anchorCustId">Anchor Cust ID</Label>
+                <Input 
+                  id="anchorCustId" 
+                  value={formData.anchorCustId}
+                  onChange={handleChange}
+                  placeholder="ANC12345"
+                  required 
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="programName">Program Name</Label>
+                <Input 
+                  id="programName" 
+                  value={formData.programName}
+                  onChange={handleChange}
+                  placeholder="Supply Chain Finance Program"
+                  required 
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="programCustId">Program Cust ID</Label>
+                <Input 
+                  id="programCustId" 
+                  value={formData.programCustId}
+                  onChange={handleChange}
+                  placeholder="PRG-001"
+                  required 
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="region">Region</Label>
+                <Input 
+                  id="region" 
+                  value={formData.region}
+                  onChange={handleChange}
+                  placeholder="Mumbai"
+                  required 
+                />
+              </div>
+
+              <div className="space-y-2">
                 <Label htmlFor="status">Status</Label>
                 <Select 
                   value={formData.status} 
@@ -93,6 +139,17 @@ export default function EditAnchorPage({ params }: { params: Promise<{ id: strin
                     <SelectItem value="Inactive">Inactive</SelectItem>
                   </SelectContent>
                 </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="psmName">PSM Name</Label>
+                <Input 
+                  id="psmName" 
+                  value={formData.psmName}
+                  onChange={handleChange}
+                  placeholder="John Smith"
+                  required 
+                />
               </div>
 
               <div className="space-y-2">
