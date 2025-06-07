@@ -11,8 +11,23 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Switch } from "@/components/ui/switch"
 import { useState } from "react"
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination"
 
-function FLDGHistoryDialog({ dealer }: { dealer: any }) {
+// Define the dealer data interface
+interface DealerFLDGData {
+  dealerId: string;
+  dealerName: string;
+  anchorName: string;
+  programName: string;
+  programCustId: string;
+  overdueDays: number;
+  overdueAmount: number;
+  fldgInvocationDays: number;
+  lastInvocation: string | null;
+  isInvoked: boolean;
+}
+
+function FLDGHistoryDialog({ dealer }: { dealer: DealerFLDGData }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -55,6 +70,26 @@ export default function FLDGViewPage() {
       [dealer.dealerId]: dealer.isInvoked || false
     }), {} as Record<string, boolean>)
   )
+  
+  const [currentPage, setCurrentPage] = useState(1)
+  const [searchQuery, setSearchQuery] = useState("")
+  
+  const itemsPerPage = 10
+  
+  // Filter dealers based on search query
+  const filteredDealers = dealerFldgData.filter(dealer => 
+    dealer.dealerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    dealer.dealerId.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    dealer.programName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    dealer.programCustId.toLowerCase().includes(searchQuery.toLowerCase())
+  )
+  
+  // Get paginated results
+  const totalPages = Math.ceil(filteredDealers.length / itemsPerPage)
+  const paginatedDealers = filteredDealers.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  )
 
   const handleInvocationToggle = (dealerId: string) => {
     setDealerStatuses(prev => ({
@@ -82,13 +117,15 @@ export default function FLDGViewPage() {
               <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                 <div className="flex items-center gap-2 w-full max-w-sm">
                   <Search className="h-4 w-4 text-muted-foreground" />
-                  <Input placeholder="Search dealers..." className="h-9" />
-                </div>
-                <div className="flex items-center gap-2 ml-auto">
-                  <Button variant="outline" size="sm">
-                    <Download className="h-4 w-4 mr-2" />
-                    Export
-                  </Button>
+                  <Input 
+                    placeholder="Search dealers..." 
+                    className="h-9" 
+                    value={searchQuery}
+                    onChange={(e) => {
+                      setSearchQuery(e.target.value)
+                      setCurrentPage(1) // Reset to first page on search
+                    }}
+                  />
                 </div>
               </div>
           </CardHeader>
@@ -100,6 +137,8 @@ export default function FLDGViewPage() {
                       <TableHead>Dealer Cust ID</TableHead>
                       <TableHead>Dealer Name</TableHead>
                       <TableHead>Anchor Name</TableHead>
+                      <TableHead>Program Name</TableHead>
+                      <TableHead>Program Cust ID</TableHead>
                       <TableHead>Overdue Days</TableHead>
                       <TableHead>Overdue Amount</TableHead>
                       <TableHead>FLDG Invocation Days</TableHead>
@@ -109,11 +148,13 @@ export default function FLDGViewPage() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {dealerFldgData.map((item) => (
+                    {paginatedDealers.map((item) => (
                       <TableRow key={item.dealerId}>
                         <TableCell className="font-medium">{item.dealerId}</TableCell>
                         <TableCell>{item.dealerName}</TableCell>
                         <TableCell>{item.anchorName}</TableCell>
+                        <TableCell>{item.programName}</TableCell>
+                        <TableCell>{item.programCustId}</TableCell>
                         <TableCell>
                           <Badge 
                             variant={item.overdueDays > 60 ? "destructive" : item.overdueDays > 30 ? "secondary" : "outline"}
@@ -139,6 +180,49 @@ export default function FLDGViewPage() {
                     ))}
                   </TableBody>
                 </Table>
+              </div>
+              
+              <div className="flex items-center justify-center py-4">
+                <Pagination>
+                  <PaginationContent>
+                    <PaginationItem>
+                      <PaginationPrevious 
+                        href="#" 
+                        onClick={(e) => {
+                          e.preventDefault()
+                          if (currentPage > 1) setCurrentPage(currentPage - 1)
+                        }}
+                        className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
+                      />
+                    </PaginationItem>
+                    
+                    {Array.from({ length: totalPages }).map((_, i) => (
+                      <PaginationItem key={i}>
+                        <PaginationLink 
+                          href="#" 
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setCurrentPage(i + 1)
+                          }}
+                          isActive={currentPage === i + 1}
+                        >
+                          {i + 1}
+                        </PaginationLink>
+                      </PaginationItem>
+                    ))}
+                    
+                    <PaginationItem>
+                      <PaginationNext 
+                        href="#" 
+                        onClick={(e) => {
+                          e.preventDefault()
+                          if (currentPage < totalPages) setCurrentPage(currentPage + 1)
+                        }}
+                        className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
+                      />
+                    </PaginationItem>
+                  </PaginationContent>
+                </Pagination>
               </div>
           </CardContent>
         </Card>
@@ -214,7 +298,7 @@ export default function FLDGViewPage() {
 
 const fldgData = [
   {
-    anchor: "Standard Bank",
+    anchor: "HDFC Bank",
     totalAmount: 10000000,
     utilized: 3500000,
     available: 6500000,
@@ -222,7 +306,7 @@ const fldgData = [
     lastUpdated: "2023-11-15",
   },
   {
-    anchor: "Shoprite Holdings",
+    anchor: "Tata Motors",
     totalAmount: 5000000,
     utilized: 2250000,
     available: 2750000,
@@ -230,7 +314,7 @@ const fldgData = [
     lastUpdated: "2023-11-14",
   },
   {
-    anchor: "MTN Group",
+    anchor: "Reliance Industries",
     totalAmount: 7500000,
     utilized: 2625000,
     available: 4875000,
@@ -238,7 +322,7 @@ const fldgData = [
     lastUpdated: "2023-11-13",
   },
   {
-    anchor: "Sasol Limited",
+    anchor: "State Bank of India",
     totalAmount: 2500000,
     utilized: 375000,
     available: 2125000,
@@ -247,11 +331,13 @@ const fldgData = [
   },
 ]
 
-const dealerFldgData = [
+const dealerFldgData: DealerFLDGData[] = [
   {
-    dealerId: "DLR-10025",
-    dealerName: "Johannesburg Motors",
-    anchorName: "Standard Bank",
+    dealerId: "DLR001",
+    dealerName: "Sharma Electronics",
+    anchorName: "HDFC Bank",
+    programName: "Supply Chain Finance",
+    programCustId: "SCF2023-001",
     overdueDays: 75,
     overdueAmount: 850000,
     fldgInvocationDays: 15,
@@ -259,9 +345,11 @@ const dealerFldgData = [
     isInvoked: true,
   },
   {
-    dealerId: "DLR-10043",
-    dealerName: "Cape Town Electronics",
-    anchorName: "MTN Group",
+    dealerId: "DLR002",
+    dealerName: "Patel Distributors",
+    anchorName: "Reliance Industries",
+    programName: "Vendor Financing",
+    programCustId: "VF2023-045",
     overdueDays: 45,
     overdueAmount: 325000,
     fldgInvocationDays: 5,
@@ -269,29 +357,35 @@ const dealerFldgData = [
     isInvoked: false,
   },
   {
-    dealerId: "DLR-10067",
-    dealerName: "Durban Distributors",
-    anchorName: "Shoprite Holdings",
+    dealerId: "DLR003",
+    dealerName: "Singh Auto Parts",
+    anchorName: "Tata Motors",
+    programName: "Dealer Financing",
+    programCustId: "DF2023-089",
     overdueDays: 60,
     overdueAmount: 480000,
-    fldgInvocationDays: 0,
+    fldgInvocationDays: 7,
     lastInvocation: null,
     isInvoked: false,
   },
   {
-    dealerId: "DLR-10082",
-    dealerName: "Pretoria Suppliers",
-    anchorName: "Standard Bank",
+    dealerId: "DLR004",
+    dealerName: "Agarwal Traders",
+    anchorName: "HDFC Bank",
+    programName: "Supply Chain Finance",
+    programCustId: "SCF2023-078",
     overdueDays: 30,
     overdueAmount: 275000,
-    fldgInvocationDays: 0,
+    fldgInvocationDays: 3,
     lastInvocation: null,
     isInvoked: false,
   },
   {
-    dealerId: "DLR-10091",
-    dealerName: "Bloemfontein Traders",
-    anchorName: "Sasol Limited",
+    dealerId: "DLR005",
+    dealerName: "Mehta Enterprises",
+    anchorName: "State Bank of India",
+    programName: "Vendor Financing",
+    programCustId: "VF2023-112",
     overdueDays: 90,
     overdueAmount: 650000,
     fldgInvocationDays: 30,
@@ -299,13 +393,255 @@ const dealerFldgData = [
     isInvoked: true,
   },
   {
-    dealerId: "DLR-10105",
-    dealerName: "Port Elizabeth Retail",
-    anchorName: "MTN Group",
+    dealerId: "DLR006",
+    dealerName: "Gupta Hardware",
+    anchorName: "Reliance Industries",
+    programName: "Supply Chain Finance",
+    programCustId: "SCF2023-156",
     overdueDays: 15,
     overdueAmount: 120000,
-    fldgInvocationDays: 0,
+    fldgInvocationDays: 2,
     lastInvocation: null,
     isInvoked: false,
   },
+  {
+    dealerId: "DLR007",
+    dealerName: "Joshi Electronics",
+    anchorName: "HDFC Bank",
+    programName: "Distributor Financing",
+    programCustId: "DF2023-201",
+    overdueDays: 55,
+    overdueAmount: 780000,
+    fldgInvocationDays: 10,
+    lastInvocation: "2023-10-25",
+    isInvoked: true,
+  },
+  {
+    dealerId: "DLR008",
+    dealerName: "Kumar Supplies",
+    anchorName: "Tata Motors",
+    programName: "Dealer Financing",
+    programCustId: "DF2023-245",
+    overdueDays: 40,
+    overdueAmount: 420000,
+    fldgInvocationDays: 8,
+    lastInvocation: null,
+    isInvoked: false,
+  },
+  {
+    dealerId: "DLR009",
+    dealerName: "Reddy Motors",
+    anchorName: "State Bank of India",
+    programName: "Vendor Financing",
+    programCustId: "VF2023-298",
+    overdueDays: 85,
+    overdueAmount: 950000,
+    fldgInvocationDays: 20,
+    lastInvocation: "2023-11-05",
+    isInvoked: true,
+  },
+  {
+    dealerId: "DLR010",
+    dealerName: "Choudhary Traders",
+    anchorName: "Reliance Industries",
+    programName: "Supply Chain Finance",
+    programCustId: "SCF2023-312",
+    overdueDays: 25,
+    overdueAmount: 180000,
+    fldgInvocationDays: 5,
+    lastInvocation: null,
+    isInvoked: false,
+  },
+  {
+    dealerId: "DLR011",
+    dealerName: "Iyer Electronics",
+    anchorName: "HDFC Bank",
+    programName: "Distributor Financing",
+    programCustId: "DF2023-367",
+    overdueDays: 70,
+    overdueAmount: 560000,
+    fldgInvocationDays: 12,
+    lastInvocation: "2023-10-18",
+    isInvoked: true,
+  },
+  {
+    dealerId: "DLR012",
+    dealerName: "Sharma Distributors",
+    anchorName: "Tata Motors",
+    programName: "Dealer Financing",
+    programCustId: "DF2023-389",
+    overdueDays: 35,
+    overdueAmount: 290000,
+    fldgInvocationDays: 7,
+    lastInvocation: null,
+    isInvoked: false,
+  },
+  {
+    dealerId: "DLR013",
+    dealerName: "Patel Auto Parts",
+    anchorName: "State Bank of India",
+    programName: "Vendor Financing",
+    programCustId: "VF2023-425",
+    overdueDays: 80,
+    overdueAmount: 720000,
+    fldgInvocationDays: 18,
+    lastInvocation: "2023-11-03",
+    isInvoked: true,
+  },
+  {
+    dealerId: "DLR014",
+    dealerName: "Verma Enterprises",
+    anchorName: "Reliance Industries",
+    programName: "Supply Chain Finance",
+    programCustId: "SCF2023-467",
+    overdueDays: 20,
+    overdueAmount: 150000,
+    fldgInvocationDays: 4,
+    lastInvocation: null,
+    isInvoked: false,
+  },
+  {
+    dealerId: "DLR015",
+    dealerName: "Mishra Traders",
+    anchorName: "HDFC Bank",
+    programName: "Distributor Financing",
+    programCustId: "DF2023-512",
+    overdueDays: 65,
+    overdueAmount: 510000,
+    fldgInvocationDays: 11,
+    lastInvocation: "2023-10-20",
+    isInvoked: true,
+  },
+  {
+    dealerId: "DLR016",
+    dealerName: "Bansal Electronics",
+    anchorName: "Tata Motors",
+    programName: "Dealer Financing",
+    programCustId: "DF2023-534",
+    overdueDays: 30,
+    overdueAmount: 240000,
+    fldgInvocationDays: 6,
+    lastInvocation: null,
+    isInvoked: false,
+  },
+  {
+    dealerId: "DLR017",
+    dealerName: "Kapoor Supplies",
+    anchorName: "State Bank of India",
+    programName: "Vendor Financing",
+    programCustId: "VF2023-578",
+    overdueDays: 75,
+    overdueAmount: 680000,
+    fldgInvocationDays: 15,
+    lastInvocation: "2023-10-28",
+    isInvoked: true,
+  },
+  {
+    dealerId: "DLR018",
+    dealerName: "Malhotra Traders",
+    anchorName: "Reliance Industries",
+    programName: "Supply Chain Finance",
+    programCustId: "SCF2023-612",
+    overdueDays: 15,
+    overdueAmount: 130000,
+    fldgInvocationDays: 3,
+    lastInvocation: null,
+    isInvoked: false,
+  },
+  {
+    dealerId: "DLR019",
+    dealerName: "Khanna Motors",
+    anchorName: "HDFC Bank",
+    programName: "Distributor Financing",
+    programCustId: "DF2023-645",
+    overdueDays: 60,
+    overdueAmount: 490000,
+    fldgInvocationDays: 9,
+    lastInvocation: "2023-10-15",
+    isInvoked: true,
+  },
+  {
+    dealerId: "DLR020",
+    dealerName: "Agarwal Enterprises",
+    anchorName: "Tata Motors",
+    programName: "Dealer Financing",
+    programCustId: "DF2023-678",
+    overdueDays: 25,
+    overdueAmount: 200000,
+    fldgInvocationDays: 5,
+    lastInvocation: null,
+    isInvoked: false,
+  },
+  {
+    dealerId: "DLR021",
+    dealerName: "Desai Trading Co.",
+    anchorName: "State Bank of India",
+    programName: "Vendor Financing",
+    programCustId: "VF2023-712",
+    overdueDays: 70,
+    overdueAmount: 630000,
+    fldgInvocationDays: 14,
+    lastInvocation: "2023-10-22",
+    isInvoked: true,
+  },
+  {
+    dealerId: "DLR022",
+    dealerName: "Bajaj Industries",
+    anchorName: "Reliance Industries",
+    programName: "Supply Chain Finance",
+    programCustId: "SCF2023-745",
+    overdueDays: 10,
+    overdueAmount: 110000,
+    fldgInvocationDays: 2,
+    lastInvocation: null,
+    isInvoked: false,
+  },
+  {
+    dealerId: "DLR023",
+    dealerName: "Menon Distributors",
+    anchorName: "HDFC Bank",
+    programName: "Distributor Financing",
+    programCustId: "DF2023-789",
+    overdueDays: 55,
+    overdueAmount: 450000,
+    fldgInvocationDays: 8,
+    lastInvocation: "2023-10-10",
+    isInvoked: true,
+  },
+  {
+    dealerId: "DLR024",
+    dealerName: "Saxena Enterprises",
+    anchorName: "Tata Motors",
+    programName: "Dealer Financing",
+    programCustId: "DF2023-823",
+    overdueDays: 20,
+    overdueAmount: 180000,
+    fldgInvocationDays: 4,
+    lastInvocation: null,
+    isInvoked: false,
+  },
+  {
+    dealerId: "DLR025",
+    dealerName: "Rao Technologies",
+    anchorName: "State Bank of India",
+    programName: "Vendor Financing",
+    programCustId: "VF2023-867",
+    overdueDays: 65,
+    overdueAmount: 580000,
+    fldgInvocationDays: 12,
+    lastInvocation: "2023-11-07",
+    isInvoked: true,
+  },
+  {
+    dealerId: "DLR026",
+    dealerName: "Nair Supplies",
+    anchorName: "Reliance Industries",
+    programName: "Supply Chain Finance",
+    programCustId: "SCF2023-901",
+    overdueDays: 5,
+    overdueAmount: 90000,
+    fldgInvocationDays: 1,
+    lastInvocation: null,
+    isInvoked: false,
+  }
 ]

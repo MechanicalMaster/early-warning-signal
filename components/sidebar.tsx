@@ -227,7 +227,6 @@ const monitoringItems: NavItem[] = [
 
 const adminItems: NavItem[] = [
   { name: "Reports", href: "/reports", icon: FileText },
-  { name: "Templates", href: "/templates", icon: Mail },
   { name: "Configuration", href: "/configuration", icon: Sliders },
   { name: "Data Sync", href: "/data-sync", icon: Sliders },
 ];

@@ -38,9 +38,25 @@ interface NewFLDGRule {
   sendPostEmail: "yes" | "no"
 }
 
+interface ReviewRule {
+  id: number
+  createdDate: string
+  isActive: boolean
+  npaPercentage: number
+  dealerSanctionedLimit: number
+  numberOfLiveDealers: number
+}
+
+interface NewReviewRule {
+  npaPercentage: number
+  dealerSanctionedLimit: number
+  numberOfLiveDealers: number
+}
+
 export default function ConfigurationPage() {
   const [isAddNewRuleOpen, setIsAddNewRuleOpen] = useState(false)
   const [isAddNewFLDGRuleOpen, setIsAddNewFLDGRuleOpen] = useState(false)
+  const [isAddNewReviewRuleOpen, setIsAddNewReviewRuleOpen] = useState(false)
   const [newRulePreviewOpen, setNewRulePreviewOpen] = useState(false)
   const [totalRules] = useState(2)
   
@@ -86,6 +102,41 @@ export default function ConfigurationPage() {
     }
   ])
 
+  // Review Rules State
+  const [reviewRules, setReviewRules] = useState<ReviewRule[]>([
+    {
+      id: 1,
+      createdDate: "2024-06-01 10:30 AM",
+      isActive: true,
+      npaPercentage: 5,
+      dealerSanctionedLimit: 1000000,
+      numberOfLiveDealers: 50
+    },
+    {
+      id: 2,
+      createdDate: "2024-06-02 09:15 AM",
+      isActive: true,
+      npaPercentage: 10,
+      dealerSanctionedLimit: 5000000,
+      numberOfLiveDealers: 100
+    },
+    {
+      id: 3,
+      createdDate: "2024-06-03 11:45 AM",
+      isActive: true,
+      npaPercentage: 15,
+      dealerSanctionedLimit: 10000000,
+      numberOfLiveDealers: 200
+    }
+  ])
+
+  // New Review Rule State
+  const [newReviewRule, setNewReviewRule] = useState<NewReviewRule>({
+    npaPercentage: 0,
+    dealerSanctionedLimit: 0,
+    numberOfLiveDealers: 0
+  })
+
   // New FLDG Rule State
   const [newFldgRule, setNewFldgRule] = useState<NewFLDGRule>({
     minAmount: 0,
@@ -128,6 +179,25 @@ export default function ConfigurationPage() {
         })
       }
       setRules([...rules, newRuleData])
+    }
+  }
+  
+  const handleDuplicateReviewRule = (ruleId: number) => {
+    const ruleToDuplicate = reviewRules.find(rule => rule.id === ruleId)
+    if (ruleToDuplicate) {
+      const newRuleData: ReviewRule = {
+        ...ruleToDuplicate,
+        id: reviewRules.length + 1,
+        createdDate: new Date().toLocaleString('en-US', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true
+        })
+      }
+      setReviewRules([...reviewRules, newRuleData])
     }
   }
 
@@ -199,42 +269,30 @@ export default function ConfigurationPage() {
                         <div className="space-y-4">
                           <div className="space-y-2">
                             <Label>Require Anchor Confirmation Applying Stop Supply</Label>
-                            <RadioGroup 
-                              value={rule.requireConfirmation}
-                              onValueChange={(value) => {
-                                setRules(rules.map(r => r.id === rule.id ? {...r, requireConfirmation: value} : r))
-                              }}
-                              className="flex gap-6"
-                            >
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="yes" id={`conf-yes-${rule.id}`} />
-                                <Label htmlFor={`conf-yes-${rule.id}`}>Yes</Label>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="no" id={`conf-no-${rule.id}`} />
-                                <Label htmlFor={`conf-no-${rule.id}`}>No</Label>
-                              </div>
-                            </RadioGroup>
+                            <div className="flex gap-2">
+                              <Switch 
+                                checked={rule.requireConfirmation === "yes"} 
+                                onCheckedChange={(checked) => {
+                                  const newValue: "yes" | "no" = checked ? "yes" : "no";
+                                  setRules(rules.map(r => r.id === rule.id ? {...r, requireConfirmation: newValue} : r))
+                                }}
+                              />
+                              <span className="text-sm">{rule.requireConfirmation === "yes" ? 'Yes' : 'No'}</span>
+                            </div>
                           </div>
 
                           <div className="space-y-2">
                             <Label>Send Reminder Email to Anchor</Label>
-                            <RadioGroup 
-                              value={rule.sendReminder}
-                              onValueChange={(value) => {
-                                setRules(rules.map(r => r.id === rule.id ? {...r, sendReminder: value} : r))
-                              }}
-                              className="flex gap-6"
-                            >
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="yes" id={`remind-yes-${rule.id}`} />
-                                <Label htmlFor={`remind-yes-${rule.id}`}>Yes</Label>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="no" id={`remind-no-${rule.id}`} />
-                                <Label htmlFor={`remind-no-${rule.id}`}>No</Label>
-                              </div>
-                            </RadioGroup>
+                            <div className="flex gap-2">
+                              <Switch 
+                                checked={rule.sendReminder === "yes"} 
+                                onCheckedChange={(checked) => {
+                                  const newValue: "yes" | "no" = checked ? "yes" : "no";
+                                  setRules(rules.map(r => r.id === rule.id ? {...r, sendReminder: newValue} : r))
+                                }}
+                              />
+                              <span className="text-sm">{rule.sendReminder === "yes" ? 'Yes' : 'No'}</span>
+                            </div>
                           </div>
                         </div>
 
@@ -416,65 +474,91 @@ export default function ConfigurationPage() {
 
         <TabsContent value="review" className="space-y-4">
           <Card>
-            <CardHeader>
-              <CardTitle>Program Review Rules Configuration</CardTitle>
-              <CardDescription>Configure thresholds for program review</CardDescription>
+            <CardHeader className="flex flex-row items-center justify-between">
+              <div>
+                <CardTitle>Program Review Rules Configuration</CardTitle>
+                <CardDescription>Configure thresholds for program review</CardDescription>
+              </div>
+              <Button 
+                onClick={() => setIsAddNewReviewRuleOpen(true)}
+                className="gap-1"
+              >
+                <Plus className="h-4 w-4" />
+                Add New Rule
+              </Button>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="space-y-4">
-                <div className="border rounded-lg p-4">
-                  <h3 className="text-lg font-semibold mb-4">Rule 1</h3>
-                  <div className="grid md:grid-cols-3 gap-4">
-                    <div className="space-y-2">
-                      <Label>NPA Percentage</Label>
-                      <Input type="number" defaultValue="5" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>Dealer Sanctioned Limit</Label>
-                      <Input type="number" defaultValue="1000000" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>Number of live dealers</Label>
-                      <Input type="number" defaultValue="50" />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="border rounded-lg p-4">
-                  <h3 className="text-lg font-semibold mb-4">Rule 2</h3>
-                  <div className="grid md:grid-cols-3 gap-4">
-                    <div className="space-y-2">
-                      <Label>NPA Percentage</Label>
-                      <Input type="number" defaultValue="10" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>Dealer Sanctioned Limit</Label>
-                      <Input type="number" defaultValue="5000000" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>Number of live dealers</Label>
-                      <Input type="number" defaultValue="100" />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="border rounded-lg p-4">
-                  <h3 className="text-lg font-semibold mb-4">Rule 3</h3>
-                  <div className="grid md:grid-cols-3 gap-4">
-                    <div className="space-y-2">
-                      <Label>NPA Percentage</Label>
-                      <Input type="number" defaultValue="15" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>Dealer Sanctioned Limit</Label>
-                      <Input type="number" defaultValue="10000000" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>Number of live dealers</Label>
-                      <Input type="number" defaultValue="200" />
-                    </div>
-                  </div>
-                </div>
+              <div className="text-sm text-muted-foreground">
+                Total Rules: {reviewRules.length}
+              </div>
+              
+              <div className="space-y-6">
+                {reviewRules.map((rule) => (
+                  <Card key={rule.id} className="border-2 border-muted">
+                    <CardHeader className="pb-2 flex flex-row items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <h3 className="text-base font-medium">Rule {rule.id} (Created: {rule.createdDate})</h3>
+                        <Lock className="h-4 w-4 text-muted-foreground" />
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Badge variant={rule.isActive ? "default" : "outline"} className="gap-1">
+                          {rule.isActive ? 'Active' : 'Inactive'}
+                        </Badge>
+                        <Switch 
+                          checked={rule.isActive} 
+                          onCheckedChange={(checked) => {
+                            setReviewRules(reviewRules.map(r => r.id === rule.id ? {...r, isActive: checked} : r))
+                          }}
+                        />
+                      </div>
+                    </CardHeader>
+                    <CardContent className="py-2">
+                      <div className="grid md:grid-cols-3 gap-4">
+                        <div className="space-y-2">
+                          <Label>NPA Percentage</Label>
+                          <Input 
+                            type="number" 
+                            value={rule.npaPercentage}
+                            onChange={(e) => {
+                              setReviewRules(reviewRules.map(r => r.id === rule.id ? {...r, npaPercentage: parseInt(e.target.value)} : r))
+                            }}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label>Dealer Sanctioned Limit</Label>
+                          <Input 
+                            type="number" 
+                            value={rule.dealerSanctionedLimit}
+                            onChange={(e) => {
+                              setReviewRules(reviewRules.map(r => r.id === rule.id ? {...r, dealerSanctionedLimit: parseInt(e.target.value)} : r))
+                            }}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label>Number of live dealers</Label>
+                          <Input 
+                            type="number" 
+                            value={rule.numberOfLiveDealers}
+                            onChange={(e) => {
+                              setReviewRules(reviewRules.map(r => r.id === rule.id ? {...r, numberOfLiveDealers: parseInt(e.target.value)} : r))
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </CardContent>
+                    <CardFooter className="pt-2 flex justify-end">
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="gap-1"
+                        onClick={() => handleDuplicateReviewRule(rule.id)}
+                      >
+                        <Copy className="h-4 w-4" />
+                        Duplicate Rule
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                ))}
               </div>
             </CardContent>
             <CardFooter>
@@ -502,7 +586,8 @@ export default function ConfigurationPage() {
                   <Switch 
                     checked={rules[0].requireConfirmation === "yes"} 
                     onCheckedChange={(checked) => {
-                      setRules(rules.map(r => r.id === 1 ? {...r, requireConfirmation: checked ? "yes" : "no"} : r))
+                      const newValue: "yes" | "no" = checked ? "yes" : "no";
+                      setRules(rules.map(r => r.id === 1 ? {...r, requireConfirmation: newValue} : r))
                     }}
                   />
                   <span className="text-sm">{rules[0].requireConfirmation === "yes" ? 'Yes' : 'No'}</span>
@@ -515,7 +600,8 @@ export default function ConfigurationPage() {
                   <Switch 
                     checked={rules[0].sendReminder === "yes"} 
                     onCheckedChange={(checked) => {
-                      setRules(rules.map(r => r.id === 1 ? {...r, sendReminder: checked ? "yes" : "no"} : r))
+                      const newValue: "yes" | "no" = checked ? "yes" : "no";
+                      setRules(rules.map(r => r.id === 1 ? {...r, sendReminder: newValue} : r))
                     }}
                   />
                   <span className="text-sm">{rules[0].sendReminder === "yes" ? 'Yes' : 'No'}</span>
@@ -685,6 +771,72 @@ export default function ConfigurationPage() {
               }
               setFldgRules([...fldgRules, newRuleData])
               setIsAddNewFLDGRuleOpen(false)
+            }}>Save</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      
+      {/* Add New Review Rule Dialog */}
+      <Dialog open={isAddNewReviewRuleOpen} onOpenChange={setIsAddNewReviewRuleOpen}>
+        <DialogContent className="sm:max-w-[600px]">
+          <DialogHeader>
+            <DialogTitle>Add New Review Rule</DialogTitle>
+            <DialogDescription>
+              Configure parameters for the new review rule
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="grid gap-6 py-4">
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label>NPA Percentage</Label>
+                <Input 
+                  type="number" 
+                  value={newReviewRule.npaPercentage}
+                  onChange={(e) => setNewReviewRule({...newReviewRule, npaPercentage: parseInt(e.target.value)})}
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label>Dealer Sanctioned Limit</Label>
+                <Input 
+                  type="number" 
+                  value={newReviewRule.dealerSanctionedLimit}
+                  onChange={(e) => setNewReviewRule({...newReviewRule, dealerSanctionedLimit: parseInt(e.target.value)})}
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label>Number of Live Dealers</Label>
+                <Input 
+                  type="number" 
+                  value={newReviewRule.numberOfLiveDealers}
+                  onChange={(e) => setNewReviewRule({...newReviewRule, numberOfLiveDealers: parseInt(e.target.value)})}
+                />
+              </div>
+            </div>
+          </div>
+          
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsAddNewReviewRuleOpen(false)}>Cancel</Button>
+            <Button onClick={() => {
+              const newRuleData: ReviewRule = {
+                id: reviewRules.length + 1,
+                createdDate: new Date().toLocaleString('en-US', {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  hour12: true
+                }),
+                isActive: true,
+                npaPercentage: newReviewRule.npaPercentage,
+                dealerSanctionedLimit: newReviewRule.dealerSanctionedLimit,
+                numberOfLiveDealers: newReviewRule.numberOfLiveDealers
+              }
+              setReviewRules([...reviewRules, newRuleData])
+              setIsAddNewReviewRuleOpen(false)
             }}>Save</Button>
           </DialogFooter>
         </DialogContent>
