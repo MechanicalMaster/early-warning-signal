@@ -144,63 +144,6 @@ export default function ConfigurationPage() {
     sendPostEmail: "yes"
   })
 
-  const handleDuplicateFldgRule = (ruleId: number) => {
-    const ruleToDuplicate = fldgRules.find(rule => rule.id === ruleId)
-    if (ruleToDuplicate) {
-      const newRuleData: FLDGRule = {
-        ...ruleToDuplicate,
-        id: fldgRules.length + 1,
-        createdDate: new Date().toLocaleString('en-US', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: true
-        })
-      }
-      setFldgRules([...fldgRules, newRuleData])
-    }
-  }
-
-  const handleDuplicateRule = (ruleId: number) => {
-    const ruleToDuplicate = rules.find(rule => rule.id === ruleId)
-    if (ruleToDuplicate) {
-      const newRuleData: StopSupplyRule = {
-        ...ruleToDuplicate,
-        id: rules.length + 1,
-        createdDate: new Date().toLocaleString('en-US', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: true
-        })
-      }
-      setRules([...rules, newRuleData])
-    }
-  }
-  
-  const handleDuplicateReviewRule = (ruleId: number) => {
-    const ruleToDuplicate = reviewRules.find(rule => rule.id === ruleId)
-    if (ruleToDuplicate) {
-      const newRuleData: ReviewRule = {
-        ...ruleToDuplicate,
-        id: reviewRules.length + 1,
-        createdDate: new Date().toLocaleString('en-US', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: true
-        })
-      }
-      setReviewRules([...reviewRules, newRuleData])
-    }
-  }
-
   return (
     <div className="flex flex-col gap-4">
       <div>
@@ -336,17 +279,6 @@ export default function ConfigurationPage() {
                         </div>
                       </div>
                     </CardContent>
-                    <CardFooter className="pt-2 flex justify-end">
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="gap-1"
-                        onClick={() => handleDuplicateRule(rule.id)}
-                      >
-                        <Copy className="h-4 w-4" />
-                        Duplicate Rule
-                      </Button>
-                    </CardFooter>
                   </Card>
                 ))}
               </div>
@@ -451,17 +383,6 @@ export default function ConfigurationPage() {
                         </div>
                       </div>
                     </CardContent>
-                    <CardFooter className="pt-2 flex justify-end">
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="gap-1"
-                        onClick={() => handleDuplicateFldgRule(rule.id)}
-                      >
-                        <Copy className="h-4 w-4" />
-                        Duplicate Rule
-                      </Button>
-                    </CardFooter>
                   </Card>
                 ))}
               </div>
@@ -546,17 +467,6 @@ export default function ConfigurationPage() {
                         </div>
                       </div>
                     </CardContent>
-                    <CardFooter className="pt-2 flex justify-end">
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="gap-1"
-                        onClick={() => handleDuplicateReviewRule(rule.id)}
-                      >
-                        <Copy className="h-4 w-4" />
-                        Duplicate Rule
-                      </Button>
-                    </CardFooter>
                   </Card>
                 ))}
               </div>
