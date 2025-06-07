@@ -10,8 +10,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
 
   useEffect(() => {
-    // Skip auth check for login page
-    if (pathname === "/login") {
+    const publicPaths = ["/login", "/"]; // Added root path
+    // Skip auth check for login page and landing page
+    if (publicPaths.includes(pathname)) {
       setIsLoading(false)
       return
     }
@@ -24,8 +25,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [pathname, router])
 
-  // Show nothing while checking authentication
-  if (isLoading && pathname !== "/login") {
+  // Show nothing while checking authentication for protected routes
+  const publicPathsForLoading = ["/login", "/"]; // Added root path
+  if (isLoading && !publicPathsForLoading.includes(pathname)) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
