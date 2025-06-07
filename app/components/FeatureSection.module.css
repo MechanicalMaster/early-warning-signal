@@ -1,0 +1,32 @@
+/* app/components/FeatureSection.module.css */
+
+.featureSectionContainer {
+  /* Tailwind's bg-gray-50 is already applied in the component. */
+  /* Ensure sufficient padding for the section if not covered by Tailwind utility 'py-12' */
+  /* Example: padding-top: 3rem; padding-bottom: 3rem; */
+}
+
+.featureGrid {
+  /* Tailwind classes `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8` handle the responsiveness. */
+  /* No additional grid-specific CSS needed unless more complex behavior is required. */
+}
+
+.featureCard {
+  /* Tailwind classes `p-6 bg-white rounded-lg shadow-md flex flex-col items-center text-center` are applied in FeatureCard.tsx */
+  /* Adding a subtle transition for hover effects and ensuring consistent height for cards in a row if content varies. */
+  transition: all 0.3s ease-in-out;
+  display: flex; /* Ensures flex properties like align-items work as expected */
+  flex-direction: column; /* Stacks icon, title, description vertically */
+  /* min-height: 280px; /* Example: Enforce a minimum height for cards to align them if text length varies significantly */
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Tailwind's shadow-lg */
+}
+
+/* Icon styling is handled by Tailwind classes directly in FeatureCard.tsx: className="w-8 h-8 text-blue-600" */
+
+/* Title styling is handled by Tailwind classes: className="text-xl font-semibold mb-2" */
+
+/* Description styling is handled by Tailwind classes: className="text-gray-600 text-sm" */

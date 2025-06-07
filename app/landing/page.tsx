@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image'; // Import Image component
+import FeatureSection from '@/components/FeatureSection'; // Import FeatureSection
 
 export default function LandingPage() {
   return (
@@ -22,10 +23,10 @@ export default function LandingPage() {
       </header>
       <main className="flex flex-col items-center justify-center flex-grow p-8 text-center">
         <h1 className="text-5xl font-bold mb-6">
-          Welcome to Our Application
+          Early Warning Signal (EWS) for Supply Chain Finance.
         </h1>
         <p className="text-xl mb-8 max-w-md">
-          This is a brief and engaging description of what our application does and why you should use it.
+          Proactively Monitor and Manage Your Supply Chain Finance Portfolio.
         </p>
         <Link href="/login" legacyBehavior>
           <a className="px-8 py-3 bg-blue-600 text-white text-lg font-semibold rounded-md hover:bg-blue-700 transition duration-300">
