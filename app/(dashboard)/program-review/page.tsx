@@ -98,9 +98,9 @@ export default function ProgramReviewPage() {
                 <TableHead>Limit Utilized</TableHead>
                 <TableHead>Utilization %</TableHead>
                 <TableHead>Overdue Amount</TableHead>
-                <TableHead>Overdue Dealers</TableHead>
-                <TableHead>% Overdue</TableHead>
-                <TableHead>Status</TableHead>
+                <TableHead>30+ DPD</TableHead>
+                <TableHead>60+ DPD</TableHead>
+                <TableHead>90+ DPD</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -125,23 +125,19 @@ export default function ProgramReviewPage() {
                     </TableCell>
                     <TableCell>₹ {anchor.overdueAmount.toLocaleString()}</TableCell>
                     <TableCell>
-                      <div className="flex items-center gap-2">
-                        <TrendingDown className={`h-4 w-4 ${anchor.overdueDealers > 5 ? "text-destructive" : "text-muted-foreground"}`} />
-                        {anchor.overdueDealers} dealers
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={anchor.overduePercentage > 10 ? "destructive" : "outline"}>
-                        {anchor.overduePercentage}%
+                      <Badge variant={anchor.dealers_30_dpd > 3 ? "destructive" : "outline"}>
+                        {anchor.dealers_30_dpd}
                       </Badge>
                     </TableCell>
                     <TableCell>
-                      {anchor.overduePercentage > 10 && (
-                        <div className="flex items-center gap-2 text-destructive">
-                          <AlertCircle className="h-4 w-4" />
-                          <span>High Risk</span>
-                        </div>
-                      )}
+                      <Badge variant={anchor.dealers_60_dpd > 2 ? "destructive" : "outline"}>
+                        {anchor.dealers_60_dpd}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant={anchor.dealers_90_dpd > 0 ? "destructive" : "outline"}>
+                        {anchor.dealers_90_dpd}
+                      </Badge>
                     </TableCell>
                   </TableRow>
                 ))
@@ -209,8 +205,10 @@ const programData = [
     limitUtilized: 35000000,
     utilizationPercentage: 70,
     overdueAmount: 2500000,
-    overdueDealers: 3,
-    overduePercentage: 7,
+    dealers_15_dpd: 4,
+    dealers_30_dpd: 2,
+    dealers_60_dpd: 1,
+    dealers_90_dpd: 0,
   },
   {
     name: "Tata Motors",
@@ -221,8 +219,10 @@ const programData = [
     limitUtilized: 60000000,
     utilizationPercentage: 80,
     overdueAmount: 9000000,
-    overdueDealers: 8,
-    overduePercentage: 15,
+    dealers_15_dpd: 10,
+    dealers_30_dpd: 6,
+    dealers_60_dpd: 3,
+    dealers_90_dpd: 1,
   },
   {
     name: "Reliance Industries",
@@ -233,8 +233,10 @@ const programData = [
     limitUtilized: 85000000,
     utilizationPercentage: 85,
     overdueAmount: 12000000,
-    overdueDealers: 10,
-    overduePercentage: 14,
+    dealers_15_dpd: 12,
+    dealers_30_dpd: 7,
+    dealers_60_dpd: 4,
+    dealers_90_dpd: 2,
   },
   {
     name: "State Bank of India",
@@ -245,8 +247,10 @@ const programData = [
     limitUtilized: 20000000,
     utilizationPercentage: 50,
     overdueAmount: 1000000,
-    overdueDealers: 2,
-    overduePercentage: 5,
+    dealers_15_dpd: 2,
+    dealers_30_dpd: 1,
+    dealers_60_dpd: 0,
+    dealers_90_dpd: 0,
   },
   {
     name: "ICICI Bank",
@@ -257,8 +261,10 @@ const programData = [
     limitUtilized: 45000000,
     utilizationPercentage: 75,
     overdueAmount: 3000000,
-    overdueDealers: 4,
-    overduePercentage: 6,
+    dealers_15_dpd: 5,
+    dealers_30_dpd: 3,
+    dealers_60_dpd: 1,
+    dealers_90_dpd: 0,
   },
   {
     name: "Mahindra & Mahindra",
@@ -269,8 +275,10 @@ const programData = [
     limitUtilized: 55000000,
     utilizationPercentage: 78,
     overdueAmount: 4500000,
-    overdueDealers: 5,
-    overduePercentage: 8,
+    dealers_15_dpd: 6,
+    dealers_30_dpd: 3,
+    dealers_60_dpd: 2,
+    dealers_90_dpd: 0,
   },
   {
     name: "Bajaj Auto",
@@ -281,8 +289,10 @@ const programData = [
     limitUtilized: 30000000,
     utilizationPercentage: 67,
     overdueAmount: 2000000,
-    overdueDealers: 3,
-    overduePercentage: 7,
+    dealers_15_dpd: 4,
+    dealers_30_dpd: 2,
+    dealers_60_dpd: 1,
+    dealers_90_dpd: 0,
   },
   {
     name: "Axis Bank",
@@ -293,8 +303,10 @@ const programData = [
     limitUtilized: 40000000,
     utilizationPercentage: 73,
     overdueAmount: 3500000,
-    overdueDealers: 4,
-    overduePercentage: 9,
+    dealers_15_dpd: 5,
+    dealers_30_dpd: 3,
+    dealers_60_dpd: 1,
+    dealers_90_dpd: 0,
   },
   {
     name: "Maruti Suzuki",
@@ -305,8 +317,10 @@ const programData = [
     limitUtilized: 75000000,
     utilizationPercentage: 83,
     overdueAmount: 8000000,
-    overdueDealers: 9,
-    overduePercentage: 11,
+    dealers_15_dpd: 9,
+    dealers_30_dpd: 6,
+    dealers_60_dpd: 3,
+    dealers_90_dpd: 1,
   },
   {
     name: "Airtel",
@@ -317,8 +331,10 @@ const programData = [
     limitUtilized: 38000000,
     utilizationPercentage: 76,
     overdueAmount: 2800000,
-    overdueDealers: 3,
-    overduePercentage: 7,
+    dealers_15_dpd: 4,
+    dealers_30_dpd: 2,
+    dealers_60_dpd: 1,
+    dealers_90_dpd: 0,
   },
   {
     name: "Larsen & Toubro",
@@ -329,8 +345,10 @@ const programData = [
     limitUtilized: 50000000,
     utilizationPercentage: 77,
     overdueAmount: 4200000,
-    overdueDealers: 5,
-    overduePercentage: 8,
+    dealers_15_dpd: 6,
+    dealers_30_dpd: 3,
+    dealers_60_dpd: 1,
+    dealers_90_dpd: 0,
   },
   {
     name: "Kotak Mahindra Bank",
@@ -341,8 +359,10 @@ const programData = [
     limitUtilized: 25000000,
     utilizationPercentage: 71,
     overdueAmount: 1800000,
-    overdueDealers: 2,
-    overduePercentage: 7,
+    dealers_15_dpd: 3,
+    dealers_30_dpd: 1,
+    dealers_60_dpd: 0,
+    dealers_90_dpd: 0,
   },
   {
     name: "Hero MotoCorp",
@@ -353,8 +373,10 @@ const programData = [
     limitUtilized: 65000000,
     utilizationPercentage: 81,
     overdueAmount: 7500000,
-    overdueDealers: 8,
-    overduePercentage: 12,
+    dealers_15_dpd: 8,
+    dealers_30_dpd: 5,
+    dealers_60_dpd: 3,
+    dealers_90_dpd: 1,
   },
   {
     name: "Infosys",
@@ -365,8 +387,10 @@ const programData = [
     limitUtilized: 32000000,
     utilizationPercentage: 71,
     overdueAmount: 2200000,
-    overdueDealers: 3,
-    overduePercentage: 7,
+    dealers_15_dpd: 4,
+    dealers_30_dpd: 2,
+    dealers_60_dpd: 1,
+    dealers_90_dpd: 0,
   },
   {
     name: "Wipro",
@@ -377,8 +401,10 @@ const programData = [
     limitUtilized: 28000000,
     utilizationPercentage: 70,
     overdueAmount: 1900000,
-    overdueDealers: 2,
-    overduePercentage: 7,
+    dealers_15_dpd: 3,
+    dealers_30_dpd: 1,
+    dealers_60_dpd: 0,
+    dealers_90_dpd: 0,
   },
   {
     name: "Yes Bank",
@@ -389,8 +415,10 @@ const programData = [
     limitUtilized: 20000000,
     utilizationPercentage: 67,
     overdueAmount: 1600000,
-    overdueDealers: 2,
-    overduePercentage: 8,
+    dealers_15_dpd: 3,
+    dealers_30_dpd: 1,
+    dealers_60_dpd: 0,
+    dealers_90_dpd: 0,
   },
   {
     name: "TVS Motors",
@@ -401,8 +429,10 @@ const programData = [
     limitUtilized: 48000000,
     utilizationPercentage: 80,
     overdueAmount: 5200000,
-    overdueDealers: 6,
-    overduePercentage: 11,
+    dealers_15_dpd: 7,
+    dealers_30_dpd: 4,
+    dealers_60_dpd: 2,
+    dealers_90_dpd: 0,
   },
   {
     name: "Adani Group",
@@ -413,8 +443,10 @@ const programData = [
     limitUtilized: 56000000,
     utilizationPercentage: 80,
     overdueAmount: 6500000,
-    overdueDealers: 7,
-    overduePercentage: 12,
+    dealers_15_dpd: 8,
+    dealers_30_dpd: 5,
+    dealers_60_dpd: 2,
+    dealers_90_dpd: 1,
   },
   {
     name: "IndusInd Bank",
@@ -425,8 +457,10 @@ const programData = [
     limitUtilized: 26000000,
     utilizationPercentage: 74,
     overdueAmount: 2100000,
-    overdueDealers: 3,
-    overduePercentage: 8,
+    dealers_15_dpd: 3,
+    dealers_30_dpd: 2,
+    dealers_60_dpd: 0,
+    dealers_90_dpd: 0,
   },
   {
     name: "Hyundai Motors India",
@@ -437,7 +471,9 @@ const programData = [
     limitUtilized: 62000000,
     utilizationPercentage: 83,
     overdueAmount: 7000000,
-    overdueDealers: 8,
-    overduePercentage: 11,
+    dealers_15_dpd: 9,
+    dealers_30_dpd: 5,
+    dealers_60_dpd: 3,
+    dealers_90_dpd: 1,
   }
 ]
