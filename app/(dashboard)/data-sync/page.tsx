@@ -66,6 +66,7 @@ export default function DataSyncPage() {
                     <SelectContent>
                       <SelectItem value="anchor">Anchor Master</SelectItem>
                       <SelectItem value="holiday">Holiday Master</SelectItem>
+                      <SelectItem value="hierarchy">Hierarchy Master</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -141,6 +142,79 @@ export default function DataSyncPage() {
                             <Badge className="bg-red-100 text-red-800 hover:bg-red-100 font-medium" variant="outline">
                               <AlertTriangle className="h-3 w-3 mr-1" />
                               Missing column 'Holiday Date'
+                            </Badge>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </CollapsibleContent>
+                </Collapsible>
+              )}
+              
+              {fileName && selectedMaster === "hierarchy" && (
+                <Collapsible open={filePreviewOpen} onOpenChange={setFilePreviewOpen} className="border rounded-md">
+                  <div className="flex items-center justify-between p-4">
+                    <h3 className="text-sm font-medium">Preview</h3>
+                    <CollapsibleTrigger asChild>
+                      <Button variant="ghost" size="sm">
+                        {filePreviewOpen ? (
+                          <ChevronDown className="h-4 w-4" />
+                        ) : (
+                          <ChevronRight className="h-4 w-4" />
+                        )}
+                      </Button>
+                    </CollapsibleTrigger>
+                  </div>
+                  <CollapsibleContent>
+                    <div className="p-4 pt-0 space-y-4">
+                      <div className="text-sm">
+                        <span className="font-medium">Columns:</span> Parent ID, Child ID, Name, Level
+                      </div>
+                      <div className="border rounded-md overflow-x-auto">
+                        <Table>
+                          <TableHeader>
+                            <TableRow>
+                              <TableHead>Parent ID</TableHead>
+                              <TableHead>Child ID</TableHead>
+                              <TableHead>Name</TableHead>
+                              <TableHead>Level</TableHead>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody>
+                            <TableRow>
+                              <TableCell>100</TableCell>
+                              <TableCell>101</TableCell>
+                              <TableCell>North Zone</TableCell>
+                              <TableCell>1</TableCell>
+                            </TableRow>
+                            <TableRow>
+                              <TableCell>101</TableCell>
+                              <TableCell>102</TableCell>
+                              <TableCell>Delhi Region</TableCell>
+                              <TableCell>2</TableCell>
+                            </TableRow>
+                            <TableRow>
+                              <TableCell>102</TableCell>
+                              <TableCell>103</TableCell>
+                              <TableCell>Connaught Place</TableCell>
+                              <TableCell>3</TableCell>
+                            </TableRow>
+                          </TableBody>
+                        </Table>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        {fileValid ? (
+                          <>
+                            <Badge className="bg-green-100 text-green-800 hover:bg-green-100 font-medium" variant="outline">
+                              <Check className="h-3 w-3 mr-1" />
+                              File is valid for Hierarchy Master
+                            </Badge>
+                          </>
+                        ) : (
+                          <>
+                            <Badge className="bg-red-100 text-red-800 hover:bg-red-100 font-medium" variant="outline">
+                              <AlertTriangle className="h-3 w-3 mr-1" />
+                              Missing column 'Parent ID'
                             </Badge>
                           </>
                         )}
@@ -434,5 +508,13 @@ const uploadHistory: UploadHistoryItem[] = [
     date: "2024-05-28 14:15 PM",
     validationStatus: "Valid",
     dbUpdateStatus: "Failed"
+  },
+  {
+    master: "Hierarchy Master",
+    fileName: "hierarchy_sample.xlsx",
+    uploadedBy: "admin@bank.com",
+    date: "2024-06-02 11:00 AM",
+    validationStatus: "Valid",
+    dbUpdateStatus: "Success"
   }
 ]

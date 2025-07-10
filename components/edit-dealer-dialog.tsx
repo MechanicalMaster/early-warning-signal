@@ -120,8 +120,8 @@ export function EditDealerDialog({ dealer }: { dealer: Dealer }) {
                 id="sanctionedLimit" 
                 type="number" 
                 value={formData.sanctionedLimit} 
-                onChange={handleChange}
-                required 
+                disabled
+                className="bg-muted"
               />
             </div>
 
@@ -185,10 +185,9 @@ export function EditDealerDialog({ dealer }: { dealer: Dealer }) {
                         </>
                       ) : (
                         <>
-                          <SelectItem value="payment-default">Payment Default</SelectItem>
-                          <SelectItem value="documentation-pending">Documentation Pending</SelectItem>
-                          <SelectItem value="compliance-issues">Compliance Issues</SelectItem>
-                          <SelectItem value="business-closure">Business Closure</SelectItem>
+                          <SelectItem value="rm-feedback">RM Feedback</SelectItem>
+                          <SelectItem value="overdue-in-other-program">Overdue in Other Program</SelectItem>
+                          <SelectItem value="others">Others</SelectItem>
                         </>
                       )}
                     </SelectContent>

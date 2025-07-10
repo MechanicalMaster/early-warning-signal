@@ -8,7 +8,8 @@ import {
   BarChartIcon, 
   TrendingDownIcon, 
   PercentIcon,
-  CalendarClockIcon
+  CalendarClockIcon,
+  Anchor as AnchorIcon
 } from "lucide-react"
 import { PortfolioHealthChart } from "@/components/portfolio-health-chart"
 import { OverdueDealers } from "@/components/overdue-dealers"
@@ -25,7 +26,6 @@ export default function DashboardPage() {
         <div className="flex items-center justify-between">
           <TabsList>
             <TabsTrigger value="daily">Daily</TabsTrigger>
-            <TabsTrigger value="weekly">Weekly</TabsTrigger>
             <TabsTrigger value="monthly">Monthly</TabsTrigger>
           </TabsList>
         </div>
@@ -56,71 +56,12 @@ export default function DashboardPage() {
 
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Daily Drawdown</CardTitle>
-                <TrendingDownIcon className="h-4 w-4 text-muted-foreground" />
+                <CardTitle className="text-sm font-medium">Total Anchors</CardTitle>
+                <AnchorIcon className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">₹ 1,28,56,000</div>
-                <p className="text-xs text-muted-foreground">-3.2% from yesterday</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Overdue Dealers</CardTitle>
-                <AlertTriangleIcon className="h-4 w-4 text-red-500" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">42</div>
-                <p className="text-xs text-red-500">+8 from yesterday</p>
-              </CardContent>
-            </Card>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="weekly" className="space-y-4">
-          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Utilisation</CardTitle>
-                <BarChartIcon className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">₹ 53,45,92,000</div>
-                <p className="text-xs text-muted-foreground">+6.8% from last week</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Dealers</CardTitle>
-                <UsersIcon className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">1,284</div>
-                <p className="text-xs text-muted-foreground">+18 from last week</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Weekly Drawdown</CardTitle>
-                <TrendingDownIcon className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">₹ 8,76,35,000</div>
-                <p className="text-xs text-muted-foreground">+12.4% from last week</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Overdue Dealers</CardTitle>
-                <AlertTriangleIcon className="h-4 w-4 text-red-500" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">42</div>
-                <p className="text-xs text-muted-foreground">-5 from last week</p>
+                <div className="text-2xl font-bold">20</div>
+                <p className="text-xs text-muted-foreground">+1 new since yesterday</p>
               </CardContent>
             </Card>
           </div>
@@ -152,23 +93,12 @@ export default function DashboardPage() {
 
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Monthly Drawdown</CardTitle>
-                <TrendingDownIcon className="h-4 w-4 text-muted-foreground" />
+                <CardTitle className="text-sm font-medium">Total Anchors</CardTitle>
+                <AnchorIcon className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">₹ 32,45,78,000</div>
-                <p className="text-xs text-muted-foreground">+22.7% from last month</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Overdue Dealers</CardTitle>
-                <AlertTriangleIcon className="h-4 w-4 text-red-500" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">42</div>
-                <p className="text-xs text-muted-foreground">-12 from last month</p>
+                <div className="text-2xl font-bold">20</div>
+                <p className="text-xs text-muted-foreground">+5 from last month</p>
               </CardContent>
             </Card>
           </div>
@@ -200,45 +130,32 @@ export default function DashboardPage() {
       <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Portfolio Utilisation Rate</CardTitle>
-            <PercentIcon className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">Overdue Dealers</CardTitle>
+            <AlertTriangleIcon className="h-4 w-4 text-red-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">68.4%</div>
-            <p className="text-xs text-muted-foreground">+2.3% from last week</p>
+            <div className="text-2xl font-bold">42</div>
+            <p className="text-xs text-red-500">+8 from last week</p>
           </CardContent>
         </Card>
-
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">High Risk Exposure</CardTitle>
-            <AlertCircleIcon className="h-4 w-4 text-amber-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">₹ 12,45,82,000</div>
-            <p className="text-xs text-amber-500">22.1% of portfolio</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Average Days Overdue</CardTitle>
-            <CalendarClockIcon className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">12.5 days</div>
-            <p className="text-xs text-muted-foreground">-0.8 days from last week</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Portfolio Health Score</CardTitle>
+            <CardTitle className="text-sm font-medium">Overdue Amount</CardTitle>
             <WalletIcon className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">76/100</div>
-            <p className="text-xs text-green-500">+3 points from last week</p>
+            <div className="text-2xl font-bold">₹ 2,15,30,000</div>
+            <p className="text-xs text-muted-foreground">15% of overdue portfolio</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Inactive Dealers</CardTitle>
+            <UsersIcon className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">15</div>
+            <p className="text-xs text-muted-foreground">-2 from last week</p>
           </CardContent>
         </Card>
       </div>
