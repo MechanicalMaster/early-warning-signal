@@ -36,15 +36,7 @@ export function PortfolioHealthChart() {
         >
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <XAxis dataKey="month" />
-          <YAxis 
-            yAxisId="left" 
-            tickFormatter={(value: number) => `₹${(value/10000000).toFixed(1)}Cr`} 
-          />
-          <YAxis 
-            yAxisId="right" 
-            orientation="right" 
-            tickFormatter={(value: number) => `${value}%`} 
-          />
+          <YAxis tickFormatter={(value: number) => `₹${(value/10000000).toFixed(1)}Cr`} />
           <Tooltip 
             formatter={(value: number, name: string) => {
               if (name === "utilisation") {
@@ -63,32 +55,8 @@ export function PortfolioHealthChart() {
             }}
           />
           <Legend />
-          <Line
-            yAxisId="left"
-            type="monotone"
-            dataKey="utilisation"
-            name="Utilisation"
-            stroke="hsl(var(--primary))"
-            activeDot={{ r: 8 }}
-            strokeWidth={2}
-          />
-          <Line
-            yAxisId="right"
-            type="monotone"
-            dataKey="overdueRate"
-            name="Overdue Rate"
-            stroke="#ff4d4f"
-            strokeWidth={2}
-          />
-          <Line
-            yAxisId="left"
-            type="monotone"
-            dataKey="riskExposure"
-            name="Risk Exposure"
-            stroke="#faad14"
-            strokeDasharray="5 5"
-            strokeWidth={2}
-          />
+          <Line type="monotone" dataKey="utilisation" name="Utilisation" stroke="#22c55e" strokeWidth={2} dot={false} />
+          <Line type="monotone" dataKey="sanctionedLimit" name="Total Sanctioned Limit" stroke="#2563eb" strokeWidth={2} dot={false} />
         </LineChart>
       </ResponsiveContainer>
     </div>
@@ -96,76 +64,16 @@ export function PortfolioHealthChart() {
 }
 
 const portfolioData = [
-  {
-    month: "Jan",
-    utilisation: 4250000000,
-    overdueRate: 3.2,
-    riskExposure: 850000000,
-  },
-  {
-    month: "Feb",
-    utilisation: 4380000000,
-    overdueRate: 3.8,
-    riskExposure: 920000000,
-  },
-  {
-    month: "Mar",
-    utilisation: 4580000000,
-    overdueRate: 4.2,
-    riskExposure: 960000000,
-  },
-  {
-    month: "Apr",
-    utilisation: 4720000000,
-    overdueRate: 5.1,
-    riskExposure: 1050000000,
-  },
-  {
-    month: "May",
-    utilisation: 4850000000,
-    overdueRate: 4.8,
-    riskExposure: 980000000,
-  },
-  {
-    month: "Jun",
-    utilisation: 5120000000,
-    overdueRate: 4.5,
-    riskExposure: 1020000000,
-  },
-  {
-    month: "Jul",
-    utilisation: 5280000000,
-    overdueRate: 4.3,
-    riskExposure: 980000000,
-  },
-  {
-    month: "Aug",
-    utilisation: 5350000000,
-    overdueRate: 4.9,
-    riskExposure: 1120000000,
-  },
-  {
-    month: "Sep",
-    utilisation: 5420000000,
-    overdueRate: 5.2,
-    riskExposure: 1180000000,
-  },
-  {
-    month: "Oct",
-    utilisation: 5540000000,
-    overdueRate: 5.8,
-    riskExposure: 1245000000,
-  },
-  {
-    month: "Nov",
-    utilisation: 5620000000,
-    overdueRate: 5.6,
-    riskExposure: 1230000000,
-  },
-  {
-    month: "Dec",
-    utilisation: 5830000000,
-    overdueRate: 5.4,
-    riskExposure: 1210000000,
-  },
+  { month: 'Jan', utilisation: 40000000, sanctionedLimit: 60000000 },
+  { month: 'Feb', utilisation: 42000000, sanctionedLimit: 62000000 },
+  { month: 'Mar', utilisation: 45000000, sanctionedLimit: 65000000 },
+  { month: 'Apr', utilisation: 47000000, sanctionedLimit: 67000000 },
+  { month: 'May', utilisation: 49000000, sanctionedLimit: 70000000 },
+  { month: 'Jun', utilisation: 51000000, sanctionedLimit: 72000000 },
+  { month: 'Jul', utilisation: 53000000, sanctionedLimit: 75000000 },
+  { month: 'Aug', utilisation: 55000000, sanctionedLimit: 77000000 },
+  { month: 'Sep', utilisation: 57000000, sanctionedLimit: 80000000 },
+  { month: 'Oct', utilisation: 59000000, sanctionedLimit: 82000000 },
+  { month: 'Nov', utilisation: 61000000, sanctionedLimit: 85000000 },
+  { month: 'Dec', utilisation: 63000000, sanctionedLimit: 87000000 },
 ] 

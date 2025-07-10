@@ -12,7 +12,7 @@ import {
   Anchor as AnchorIcon
 } from "lucide-react"
 import { PortfolioHealthChart } from "@/components/portfolio-health-chart"
-import { OverdueDealers } from "@/components/overdue-dealers"
+import { TopAnchors } from "@/components/top-anchors"
 
 export default function DashboardPage() {
   return (
@@ -42,7 +42,6 @@ export default function DashboardPage() {
                 <p className="text-xs text-muted-foreground">+4.3% from yesterday</p>
               </CardContent>
             </Card>
-
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Total Dealers</CardTitle>
@@ -53,7 +52,6 @@ export default function DashboardPage() {
                 <p className="text-xs text-muted-foreground">+5 new since yesterday</p>
               </CardContent>
             </Card>
-
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Total Anchors</CardTitle>
@@ -62,6 +60,16 @@ export default function DashboardPage() {
               <CardContent>
                 <div className="text-2xl font-bold">20</div>
                 <p className="text-xs text-muted-foreground">+1 new since yesterday</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Total Sanctioned Limit</CardTitle>
+                <WalletIcon className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">₹ 80,00,00,000</div>
+                <p className="text-xs text-muted-foreground">+2.1% from yesterday</p>
               </CardContent>
             </Card>
           </div>
@@ -79,7 +87,6 @@ export default function DashboardPage() {
                 <p className="text-xs text-muted-foreground">+15.2% from last month</p>
               </CardContent>
             </Card>
-
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Total Dealers</CardTitle>
@@ -90,7 +97,6 @@ export default function DashboardPage() {
                 <p className="text-xs text-muted-foreground">+52 from last month</p>
               </CardContent>
             </Card>
-
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Total Anchors</CardTitle>
@@ -99,6 +105,16 @@ export default function DashboardPage() {
               <CardContent>
                 <div className="text-2xl font-bold">20</div>
                 <p className="text-xs text-muted-foreground">+5 from last month</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Total Sanctioned Limit</CardTitle>
+                <WalletIcon className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">₹ 1,00,00,00,000</div>
+                <p className="text-xs text-muted-foreground">+8.7% from last month</p>
               </CardContent>
             </Card>
           </div>
@@ -118,11 +134,11 @@ export default function DashboardPage() {
 
         <Card className="lg:col-span-3">
           <CardHeader>
-            <CardTitle>Critical Overdue Dealers</CardTitle>
-            <CardDescription>Dealers with highest risk indicators</CardDescription>
+            <CardTitle>Top Anchors</CardTitle>
+            <CardDescription>Anchors with highest portfolio value or dealer count</CardDescription>
           </CardHeader>
           <CardContent>
-            <OverdueDealers />
+            <TopAnchors />
           </CardContent>
         </Card>
       </div>
