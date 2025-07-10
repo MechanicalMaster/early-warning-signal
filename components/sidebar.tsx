@@ -221,8 +221,6 @@ const monitoringItems: NavItem[] = [
   { name: "Stop Supply", href: "/stop-supply", icon: AlertOctagon },
   { name: "FLDG View", href: "/fldg-view", icon: Shield },
   { name: "Credit Noting", href: "/dealer-status", icon: Store },
-  { name: "Anchor Expiry", href: "/anchor-expiry", icon: Clock },
-  { name: "Program Review", href: "/program-review", icon: BarChart },
 ];
 
 const adminItems: NavItem[] = [
