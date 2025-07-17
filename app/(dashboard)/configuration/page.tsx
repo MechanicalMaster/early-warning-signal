@@ -21,6 +21,7 @@ interface StopSupplyRule {
   sendReminder: "yes" | "no"
   reminderDays: number
   emailsToSend: number
+  amount: number
 }
 
 interface FLDGRule {
@@ -53,7 +54,8 @@ export default function ConfigurationPage() {
       requireConfirmation: "yes",
       sendReminder: "yes",
       reminderDays: 7,
-      emailsToSend: 3
+      emailsToSend: 3,
+      amount: 50000
     },
     {
       id: 2,
@@ -62,7 +64,8 @@ export default function ConfigurationPage() {
       requireConfirmation: "no",
       sendReminder: "no",
       reminderDays: 0,
-      emailsToSend: 0
+      emailsToSend: 0,
+      amount: 0
     }
   ])
 
@@ -220,6 +223,18 @@ export default function ConfigurationPage() {
                                 Not Set
                               </div>
                             )}
+                          </div>
+
+                          <div className="space-y-2">
+                            <Label>Amount</Label>
+                            <Input 
+                              type="number" 
+                              value={rule.amount} 
+                              onChange={(e) => {
+                                setRules(rules.map(r => r.id === rule.id ? {...r, amount: parseInt(e.target.value)} : r))
+                              }}
+                              min="0"
+                            />
                           </div>
                         </div>
                       </div>
@@ -403,6 +418,18 @@ export default function ConfigurationPage() {
                   min="1"
                 />
               </div>
+
+              <div className="space-y-2">
+                <Label>Amount</Label>
+                <Input 
+                  type="number" 
+                  value={rules[0].amount} 
+                  onChange={(e) => {
+                    setRules(rules.map(r => r.id === 1 ? {...r, amount: parseInt(e.target.value)} : r))
+                  }}
+                  min="0"
+                />
+              </div>
               
               <div className="pt-2">
                 <Collapsible 
@@ -454,7 +481,8 @@ export default function ConfigurationPage() {
                 requireConfirmation: rules[0].requireConfirmation,
                 sendReminder: rules[0].sendReminder,
                 reminderDays: rules[0].sendReminder ? rules[0].reminderDays : 0,
-                emailsToSend: rules[0].emailsToSend
+                emailsToSend: rules[0].emailsToSend,
+                amount: rules[0].amount
               }
               setRules([...rules, newRuleData])
               setIsAddNewRuleOpen(false)

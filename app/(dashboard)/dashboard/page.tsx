@@ -26,7 +26,8 @@ export default function DashboardPage() {
         <div className="flex items-center justify-between">
           <TabsList>
             <TabsTrigger value="daily">Daily</TabsTrigger>
-            <TabsTrigger value="monthly">Monthly</TabsTrigger>
+            <TabsTrigger value="last7days">Last 7 days</TabsTrigger>
+            <TabsTrigger value="monthly">Last Month</TabsTrigger>
           </TabsList>
         </div>
 
@@ -70,6 +71,51 @@ export default function DashboardPage() {
               <CardContent>
                 <div className="text-2xl font-bold">₹ 80,00,00,000</div>
                 <p className="text-xs text-muted-foreground">+2.1% from yesterday</p>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="last7days" className="space-y-4">
+          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Total Utilisation</CardTitle>
+                <BarChartIcon className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">₹ 12,45,67,890</div>
+                <p className="text-xs text-muted-foreground">+5.1% from last week</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Total Dealers</CardTitle>
+                <UsersIcon className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">1,284</div>
+                <p className="text-xs text-muted-foreground">+12 new in last 7 days</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Total Anchors</CardTitle>
+                <AnchorIcon className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">20</div>
+                <p className="text-xs text-muted-foreground">+2 in last 7 days</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Total Sanctioned Limit</CardTitle>
+                <WalletIcon className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">₹ 82,00,00,000</div>
+                <p className="text-xs text-muted-foreground">+1.5% from last week</p>
               </CardContent>
             </Card>
           </div>
