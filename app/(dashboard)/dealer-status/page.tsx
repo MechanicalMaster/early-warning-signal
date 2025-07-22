@@ -123,8 +123,6 @@ export default function DealerStatusPage() {
                     <TableHead>Dealer Cust ID</TableHead>
                     <TableHead>Name</TableHead>
                     <TableHead>Anchor</TableHead>
-                    <TableHead>Program Name</TableHead>
-                    <TableHead>Program Cust ID</TableHead>
                     <TableHead>Sanctioned Limit</TableHead>
                     <TableHead>Utilised Limit</TableHead>
                     <TableHead>Utilisation %</TableHead>
@@ -140,8 +138,6 @@ export default function DealerStatusPage() {
                       <TableCell className="font-medium">{dealer.dealerCustId}</TableCell>
                       <TableCell>{dealer.name}</TableCell>
                       <TableCell>{dealer.anchor}</TableCell>
-                      <TableCell>{dealer.programName}</TableCell>
-                      <TableCell>{dealer.programCustId}</TableCell>
                       <TableCell>₹{dealer.sanctionedLimit.toLocaleString()}</TableCell>
                       <TableCell>₹{dealer.utilisedLimit.toLocaleString()}</TableCell>
                       <TableCell>{dealer.utilisationPercentage}%</TableCell>

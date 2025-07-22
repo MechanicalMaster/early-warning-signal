@@ -137,8 +137,6 @@ export default function FLDGViewPage() {
                       <TableHead>Dealer Cust ID</TableHead>
                       <TableHead>Dealer Name</TableHead>
                       <TableHead>Anchor Name</TableHead>
-                      <TableHead>Program Name</TableHead>
-                      <TableHead>Program Cust ID</TableHead>
                       <TableHead>Overdue Days</TableHead>
                       <TableHead>Overdue Amount</TableHead>
                       <TableHead>FLDG Invocation Days</TableHead>
@@ -153,8 +151,6 @@ export default function FLDGViewPage() {
                         <TableCell className="font-medium">{item.dealerId}</TableCell>
                         <TableCell>{item.dealerName}</TableCell>
                         <TableCell>{item.anchorName}</TableCell>
-                        <TableCell>{item.programName}</TableCell>
-                        <TableCell>{item.programCustId}</TableCell>
                         <TableCell>
                           <Badge 
                             variant={item.overdueDays > 60 ? "destructive" : item.overdueDays > 30 ? "secondary" : "outline"}

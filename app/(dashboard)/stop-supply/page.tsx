@@ -124,8 +124,6 @@ export default function StopSupplyPage() {
                   <TableHead>Dealer Cust ID</TableHead>
                   <TableHead>Dealer Name</TableHead>
                   <TableHead>Anchor Name</TableHead>
-                  <TableHead>Program Name</TableHead>
-                  <TableHead>Program Cust ID</TableHead>
                   <TableHead>Overdue Days</TableHead>
                   <TableHead>Overdue Amount</TableHead>
                   <TableHead>Stop Supply Days</TableHead>
@@ -143,8 +141,6 @@ export default function StopSupplyPage() {
                     <TableCell className="font-medium">{dealer.id}</TableCell>
                     <TableCell>{dealer.name}</TableCell>
                     <TableCell>{dealer.anchor}</TableCell>
-                    <TableCell>{dealer.programName}</TableCell>
-                    <TableCell>{dealer.programCustId}</TableCell>
                     <TableCell>
                       <Badge variant={dealer.overdueDays > 60 ? "destructive" : "outline"}>
                         {dealer.overdueDays} days
