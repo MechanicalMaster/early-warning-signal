@@ -135,11 +135,8 @@ export default function AnchorMasterPage() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Anchor ID</TableHead>
-                  <TableHead>Name</TableHead>
+                  <TableHead>Anchor Name</TableHead>
                   <TableHead>Industry</TableHead>
-                  <TableHead>Program Name</TableHead>
-                  <TableHead>Program Cust ID</TableHead>
                   <TableHead>Anchor Cust ID</TableHead>
                   <TableHead>PSM Name</TableHead>
                   <TableHead>Region</TableHead>
@@ -150,11 +147,8 @@ export default function AnchorMasterPage() {
               <TableBody>
                 {paginatedAnchors.map((anchor) => (
                   <TableRow key={anchor.id}>
-                    <TableCell className="font-medium">{anchor.id}</TableCell>
                     <TableCell>{anchor.name}</TableCell>
                     <TableCell>{anchor.industry}</TableCell>
-                    <TableCell>{anchor.programName}</TableCell>
-                    <TableCell>{anchor.programCustId}</TableCell>
                     <TableCell>{anchor.anchorCustId}</TableCell>
                     <TableCell>{anchor.psmName}</TableCell>
                     <TableCell>{anchor.region}</TableCell>

@@ -133,18 +133,6 @@ export function EditDealerMasterDialog({ dealer, anchorEmails }: EditDealerMaste
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="programName">Program Name</Label>
-                <Input id="programName" value={formData.programName} disabled className="bg-muted" />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="programCustId">Program Cust ID</Label>
-                <Input id="programCustId" value={formData.programCustId} disabled className="bg-muted" />
-              </div>
-            </div>
-
             <div className="space-y-2">
               <Label htmlFor="fldgInvocation">FLDG Invocation Email</Label>
               <Popover open={fldgPopoverOpen} onOpenChange={setFldgPopoverOpen}>

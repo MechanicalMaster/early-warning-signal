@@ -72,11 +72,6 @@ export default function EditAnchorPage({ params }: { params: Promise<{ id: strin
           <form onSubmit={handleSubmit} className="grid gap-6">
             <div className="grid gap-4">
               <div className="space-y-2">
-                <Label htmlFor="id">Anchor ID</Label>
-                <Input id="id" value={formData.id} disabled className="bg-muted" />
-              </div>
-
-              <div className="space-y-2">
                 <Label htmlFor="name">Anchor Name</Label>
                 <Input id="name" value={formData.name} disabled className="bg-muted" />
               </div>
@@ -88,28 +83,6 @@ export default function EditAnchorPage({ params }: { params: Promise<{ id: strin
                   value={formData.anchorCustId}
                   onChange={handleChange}
                   placeholder="ANC12345"
-                  required 
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="programName">Program Name</Label>
-                <Input 
-                  id="programName" 
-                  value={formData.programName}
-                  onChange={handleChange}
-                  placeholder="Supply Chain Finance Program"
-                  required 
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="programCustId">Program Cust ID</Label>
-                <Input 
-                  id="programCustId" 
-                  value={formData.programCustId}
-                  onChange={handleChange}
-                  placeholder="PRG-001"
                   required 
                 />
               </div>

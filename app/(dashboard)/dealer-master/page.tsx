@@ -67,10 +67,8 @@ export default function DealerMasterPage() {
               <TableHeader>
                 <TableRow>
                   <TableHead>Dealer Cust ID</TableHead>
-                  <TableHead>Name</TableHead>
+                  <TableHead>Dealer Name</TableHead>
                   <TableHead>Anchor</TableHead>
-                  <TableHead>Program Name</TableHead>
-                  <TableHead>Program Cust ID</TableHead>
                   <TableHead>Credit Limit</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
@@ -86,8 +84,6 @@ export default function DealerMasterPage() {
                       <TableCell className="font-medium">{dealer.dealerCustId}</TableCell>
                       <TableCell>{dealer.name}</TableCell>
                       <TableCell>{dealer.anchor}</TableCell>
-                      <TableCell>{dealer.programName}</TableCell>
-                      <TableCell>{dealer.programCustId}</TableCell>
                       <TableCell>₹ {dealer.creditLimit.toLocaleString()}</TableCell>
                       <TableCell className="text-right">
                         <div className="flex justify-end gap-2">
