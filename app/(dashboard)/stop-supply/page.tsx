@@ -124,6 +124,7 @@ export default function StopSupplyPage() {
                   <TableHead>Dealer Cust ID</TableHead>
                   <TableHead>Dealer Name</TableHead>
                   <TableHead>Anchor Name</TableHead>
+                  <TableHead>Anchor Cust ID</TableHead>
                   <TableHead>Overdue Days</TableHead>
                   <TableHead>Overdue Amount</TableHead>
                   <TableHead>Stop Supply Days</TableHead>
@@ -141,6 +142,7 @@ export default function StopSupplyPage() {
                     <TableCell className="font-medium">{dealer.id}</TableCell>
                     <TableCell>{dealer.name}</TableCell>
                     <TableCell>{dealer.anchor}</TableCell>
+                    <TableCell>{dealer.anchorCustId}</TableCell>
                     <TableCell>
                       <Badge variant={dealer.overdueDays > 60 ? "destructive" : "outline"}>
                         {dealer.overdueDays} days
@@ -232,6 +234,7 @@ export interface StopSupplyDealer {
   id: string
   name: string
   anchor: string
+  anchorCustId: string
   programName: string
   programCustId: string
   overdueDays: number
@@ -263,6 +266,7 @@ const stopSupplyDealers: StopSupplyDealer[] = [
     id: "DLR001",
     name: "Sharma Electronics",
     anchor: "HDFC Bank",
+    anchorCustId: "ANC001",
     programName: "Supply Chain Finance",
     programCustId: "SCF2023-001",
     overdueDays: 45,
@@ -314,6 +318,7 @@ const stopSupplyDealers: StopSupplyDealer[] = [
     id: "DLR002",
     name: "Patel Distributors",
     anchor: "Tata Motors",
+    anchorCustId: "ANC002",
     programName: "Dealer Financing",
     programCustId: "DF2023-045",
     overdueDays: 30,
@@ -343,6 +348,7 @@ const stopSupplyDealers: StopSupplyDealer[] = [
     id: "DLR003",
     name: "Singh Auto Parts",
     anchor: "Reliance Industries",
+    anchorCustId: "ANC003",
     programName: "Vendor Financing",
     programCustId: "VF2023-089",
     overdueDays: 90,
@@ -378,6 +384,7 @@ const stopSupplyDealers: StopSupplyDealer[] = [
     id: "DLR004",
     name: "Agarwal Traders",
     anchor: "ICICI Bank",
+    anchorCustId: "ANC004",
     programName: "Supply Chain Finance",
     programCustId: "SCF2023-078",
     overdueDays: 65,
@@ -407,6 +414,7 @@ const stopSupplyDealers: StopSupplyDealer[] = [
     id: "DLR005",
     name: "Mehta Enterprises",
     anchor: "Mahindra & Mahindra",
+    anchorCustId: "ANC005",
     programName: "Dealer Financing",
     programCustId: "DF2023-112",
     overdueDays: 15,
@@ -436,6 +444,7 @@ const stopSupplyDealers: StopSupplyDealer[] = [
     id: "DLR006",
     name: "Gupta Hardware",
     anchor: "State Bank of India",
+    anchorCustId: "ANC006",
     programName: "Vendor Financing",
     programCustId: "VF2023-156",
     overdueDays: 40,
@@ -465,6 +474,7 @@ const stopSupplyDealers: StopSupplyDealer[] = [
     id: "DLR007",
     name: "Joshi Electronics",
     anchor: "Airtel",
+    anchorCustId: "ANC007",
     programName: "Distributor Financing",
     programCustId: "DF2023-201",
     overdueDays: 55,
@@ -494,6 +504,7 @@ const stopSupplyDealers: StopSupplyDealer[] = [
     id: "DLR008",
     name: "Kumar Supplies",
     anchor: "Axis Bank",
+    anchorCustId: "ANC008",
     programName: "Supply Chain Finance",
     programCustId: "SCF2023-145",
     overdueDays: 25,
@@ -523,6 +534,7 @@ const stopSupplyDealers: StopSupplyDealer[] = [
     id: "DLR009",
     name: "Reddy Motors",
     anchor: "Bajaj Auto",
+    anchorCustId: "ANC009",
     programName: "Dealer Financing",
     programCustId: "DF2023-178",
     overdueDays: 70,
@@ -552,6 +564,7 @@ const stopSupplyDealers: StopSupplyDealer[] = [
     id: "DLR010",
     name: "Choudhary Traders",
     anchor: "Reliance Industries",
+    anchorCustId: "ANC010",
     programName: "Vendor Financing",
     programCustId: "VF2023-223",
     overdueDays: 35,
@@ -581,6 +594,7 @@ const stopSupplyDealers: StopSupplyDealer[] = [
     id: "DLR011",
     name: "Iyer Electronics",
     anchor: "HDFC Bank",
+    anchorCustId: "ANC011",
     programName: "Supply Chain Finance",
     programCustId: "SCF2023-189",
     overdueDays: 60,
@@ -610,6 +624,7 @@ const stopSupplyDealers: StopSupplyDealer[] = [
     id: "DLR012",
     name: "Sharma Distributors",
     anchor: "Tata Motors",
+    anchorCustId: "ANC012",
     programName: "Dealer Financing",
     programCustId: "DF2023-234",
     overdueDays: 50,
@@ -639,6 +654,7 @@ const stopSupplyDealers: StopSupplyDealer[] = [
     id: "DLR013",
     name: "Patel Auto Parts",
     anchor: "Maruti Suzuki",
+    anchorCustId: "ANC013",
     programName: "Vendor Financing",
     programCustId: "VF2023-267",
     overdueDays: 85,
@@ -668,6 +684,7 @@ const stopSupplyDealers: StopSupplyDealer[] = [
     id: "DLR014",
     name: "Verma Enterprises",
     anchor: "ICICI Bank",
+    anchorCustId: "ANC014",
     programName: "Supply Chain Finance",
     programCustId: "SCF2023-289",
     overdueDays: 20,
@@ -697,6 +714,7 @@ const stopSupplyDealers: StopSupplyDealer[] = [
     id: "DLR015",
     name: "Mishra Traders",
     anchor: "Mahindra & Mahindra",
+    anchorCustId: "ANC015",
     programName: "Dealer Financing",
     programCustId: "DF2023-312",
     overdueDays: 75,
@@ -726,6 +744,7 @@ const stopSupplyDealers: StopSupplyDealer[] = [
     id: "DLR016",
     name: "Bansal Electronics",
     anchor: "State Bank of India",
+    anchorCustId: "ANC016",
     programName: "Vendor Financing",
     programCustId: "VF2023-334",
     overdueDays: 30,
@@ -755,6 +774,7 @@ const stopSupplyDealers: StopSupplyDealer[] = [
     id: "DLR017",
     name: "Kapoor Supplies",
     anchor: "Airtel",
+    anchorCustId: "ANC017",
     programName: "Distributor Financing",
     programCustId: "DF2023-356",
     overdueDays: 55,
@@ -784,6 +804,7 @@ const stopSupplyDealers: StopSupplyDealer[] = [
     id: "DLR018",
     name: "Malhotra Traders",
     anchor: "Axis Bank",
+    anchorCustId: "ANC018",
     programName: "Supply Chain Finance",
     programCustId: "SCF2023-378",
     overdueDays: 40,
@@ -813,6 +834,7 @@ const stopSupplyDealers: StopSupplyDealer[] = [
     id: "DLR019",
     name: "Khanna Motors",
     anchor: "Bajaj Auto",
+    anchorCustId: "ANC019",
     programName: "Dealer Financing",
     programCustId: "DF2023-390",
     overdueDays: 65,
@@ -842,6 +864,7 @@ const stopSupplyDealers: StopSupplyDealer[] = [
     id: "DLR020",
     name: "Agarwal Enterprises",
     anchor: "Reliance Industries",
+    anchorCustId: "ANC020",
     programName: "Vendor Financing",
     programCustId: "VF2023-412",
     overdueDays: 35,

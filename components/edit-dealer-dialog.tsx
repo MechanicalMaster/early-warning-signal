@@ -22,6 +22,7 @@ export type Dealer = {
   id: string
   name: string
   anchor: string
+  anchorCustId: string
   dealerCustId: string
   programName: string
   programCustId: string

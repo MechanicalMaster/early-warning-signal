@@ -69,6 +69,7 @@ export default function DealerMasterPage() {
                   <TableHead>Dealer Cust ID</TableHead>
                   <TableHead>Dealer Name</TableHead>
                   <TableHead>Anchor</TableHead>
+                  <TableHead>Anchor Cust ID</TableHead>
                   <TableHead>Credit Limit</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
@@ -84,6 +85,7 @@ export default function DealerMasterPage() {
                       <TableCell className="font-medium">{dealer.dealerCustId}</TableCell>
                       <TableCell>{dealer.name}</TableCell>
                       <TableCell>{dealer.anchor}</TableCell>
+                      <TableCell>{dealer.anchorCustId}</TableCell>
                       <TableCell>₹ {dealer.creditLimit.toLocaleString()}</TableCell>
                       <TableCell className="text-right">
                         <div className="flex justify-end gap-2">
@@ -141,6 +143,7 @@ const dealers: DealerMaster[] = [
     dealerCustId: "RTLHDFC0001",
     name: "Reliance Retail",
     anchor: "Standard Bank",
+    anchorCustId: "STD0000123",
     programName: "Standard Bank Supply Chain Finance",
     programCustId: "SCF-SB-001",
     contactPerson: "James Wilson",
@@ -155,6 +158,7 @@ const dealers: DealerMaster[] = [
     dealerCustId: "FLPSHOP0023",
     name: "Flipkart India",
     anchor: "Shoprite Holdings",
+    anchorCustId: "SHP0000456",
     programName: "Shoprite Distributor Finance",
     programCustId: "DF-SH-052",
     contactPerson: "Lerato Molefe",
@@ -169,6 +173,7 @@ const dealers: DealerMaster[] = [
     dealerCustId: "AMZMTN0045",
     name: "Amazon Seller Services",
     anchor: "MTN Group",
+    anchorCustId: "MTN0000789",
     programName: "MTN Partner Program",
     programCustId: "PP-MTN-105",
     contactPerson: "Raj Patel",
@@ -183,6 +188,7 @@ const dealers: DealerMaster[] = [
     dealerCustId: "BIJSAS0078",
     name: "Bijou Electronics",
     anchor: "Sasol Limited",
+    anchorCustId: "SAS0001012",
     programName: "Sasol Vendor Financing",
     programCustId: "VF-SL-021",
     contactPerson: "Pieter van der Merwe",
@@ -197,6 +203,7 @@ const dealers: DealerMaster[] = [
     dealerCustId: "TATDISC0089",
     name: "Tata Electronics",
     anchor: "Discovery Limited",
+    anchorCustId: "DLY0001345",
     programName: "Discovery Distribution Finance",
     programCustId: "DF-DL-067",
     contactPerson: "Nomsa Dlamini",
@@ -211,6 +218,7 @@ const dealers: DealerMaster[] = [
     dealerCustId: "BPLSTD0101",
     name: "Best Price Logistics",
     anchor: "Standard Bank",
+    anchorCustId: "STD0001678",
     programName: "Standard Bank Supply Chain Finance",
     programCustId: "SCF-SB-001",
     contactPerson: "Peter Johnson",
@@ -225,6 +233,7 @@ const dealers: DealerMaster[] = [
     dealerCustId: "MYNSHOP0112",
     name: "Myntra Designs",
     anchor: "Shoprite Holdings",
+    anchorCustId: "SHP0001901",
     programName: "Shoprite Distributor Finance",
     programCustId: "DF-SH-052",
     contactPerson: "Lucy Mabaso",
@@ -239,6 +248,7 @@ const dealers: DealerMaster[] = [
     dealerCustId: "GRSMTN0135",
     name: "Grofers India",
     anchor: "MTN Group",
+    anchorCustId: "MTN0002234",
     programName: "MTN Partner Program",
     programCustId: "PP-MTN-105",
     contactPerson: "Thabo Nkosi",
@@ -253,6 +263,7 @@ const dealers: DealerMaster[] = [
     dealerCustId: "BKSSAS0149",
     name: "Booksellers Network",
     anchor: "Sasol Limited",
+    anchorCustId: "SAS0002567",
     programName: "Sasol Vendor Financing",
     programCustId: "VF-SL-021",
     contactPerson: "Johan Meyer",
@@ -267,6 +278,7 @@ const dealers: DealerMaster[] = [
     dealerCustId: "APPDISC0153",
     name: "Appario Retail",
     anchor: "Discovery Limited",
+    anchorCustId: "DLY0002900",
     programName: "Discovery Distribution Finance",
     programCustId: "DF-DL-067",
     contactPerson: "Zandile Khumalo",
@@ -281,6 +293,7 @@ const dealers: DealerMaster[] = [
     dealerCustId: "URBSTD0169",
     name: "Urban Company",
     anchor: "Standard Bank",
+    anchorCustId: "STD0003233",
     programName: "Standard Bank Supply Chain Finance",
     programCustId: "SCF-SB-001",
     contactPerson: "David Okello",
@@ -295,6 +308,7 @@ const dealers: DealerMaster[] = [
     dealerCustId: "BIGSHOP0174",
     name: "BigBasket",
     anchor: "Shoprite Holdings",
+    anchorCustId: "SHP0003566",
     programName: "Shoprite Distributor Finance",
     programCustId: "DF-SH-052",
     contactPerson: "Thandi Ngcobo",
@@ -309,6 +323,7 @@ const dealers: DealerMaster[] = [
     dealerCustId: "DMTMTN0188",
     name: "DMart",
     anchor: "MTN Group",
+    anchorCustId: "MTN0003900",
     programName: "MTN Partner Program",
     programCustId: "PP-MTN-105",
     contactPerson: "Sipho Zulu",
@@ -323,6 +338,7 @@ const dealers: DealerMaster[] = [
     dealerCustId: "SWGSAS0196",
     name: "Swiggy",
     anchor: "Sasol Limited",
+    anchorCustId: "SAS0004233",
     programName: "Sasol Vendor Financing",
     programCustId: "VF-SL-021",
     contactPerson: "Andre Venter",
@@ -337,6 +353,7 @@ const dealers: DealerMaster[] = [
     dealerCustId: "ZOMDISC0205",
     name: "Zomato",
     anchor: "Discovery Limited",
+    anchorCustId: "DLY0004566",
     programName: "Discovery Distribution Finance",
     programCustId: "DF-DL-067",
     contactPerson: "Ayanda Mbeki",
@@ -351,6 +368,7 @@ const dealers: DealerMaster[] = [
     dealerCustId: "NYKASTD0217",
     name: "Nykaa",
     anchor: "Standard Bank",
+    anchorCustId: "STD0004900",
     programName: "Standard Bank Supply Chain Finance",
     programCustId: "SCF-SB-001",
     contactPerson: "Thomas Brown",
@@ -365,6 +383,7 @@ const dealers: DealerMaster[] = [
     dealerCustId: "LNSSHOP0229",
     name: "Lenskart",
     anchor: "Shoprite Holdings",
+    anchorCustId: "SHP0005233",
     programName: "Shoprite Distributor Finance",
     programCustId: "DF-SH-052",
     contactPerson: "Precious Moyo",
@@ -379,6 +398,7 @@ const dealers: DealerMaster[] = [
     dealerCustId: "PHRMTN0234",
     name: "PharmEasy",
     anchor: "MTN Group",
+    anchorCustId: "MTN0005566",
     programName: "MTN Partner Program",
     programCustId: "PP-MTN-105",
     contactPerson: "Lindwe Sithole",
@@ -393,6 +413,7 @@ const dealers: DealerMaster[] = [
     dealerCustId: "CRDSAS0246",
     name: "CarDekho",
     anchor: "Sasol Limited",
+    anchorCustId: "SAS0005900",
     programName: "Sasol Vendor Financing",
     programCustId: "VF-SL-021",
     contactPerson: "Willem Pretorius",
@@ -407,6 +428,7 @@ const dealers: DealerMaster[] = [
     dealerCustId: "MMTDISC0251",
     name: "MakeMyTrip",
     anchor: "Discovery Limited",
+    anchorCustId: "DLY0006233",
     programName: "Discovery Distribution Finance",
     programCustId: "DF-DL-067",
     contactPerson: "Nandi Xaba",

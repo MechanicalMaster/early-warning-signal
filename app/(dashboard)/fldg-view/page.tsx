@@ -18,6 +18,7 @@ interface DealerFLDGData {
   dealerId: string;
   dealerName: string;
   anchorName: string;
+  anchorCustId: string;
   programName: string;
   programCustId: string;
   overdueDays: number;
@@ -137,6 +138,7 @@ export default function FLDGViewPage() {
                       <TableHead>Dealer Cust ID</TableHead>
                       <TableHead>Dealer Name</TableHead>
                       <TableHead>Anchor Name</TableHead>
+                      <TableHead>Anchor Cust ID</TableHead>
                       <TableHead>Overdue Days</TableHead>
                       <TableHead>Overdue Amount</TableHead>
                       <TableHead>FLDG Invocation Days</TableHead>
@@ -151,6 +153,7 @@ export default function FLDGViewPage() {
                         <TableCell className="font-medium">{item.dealerId}</TableCell>
                         <TableCell>{item.dealerName}</TableCell>
                         <TableCell>{item.anchorName}</TableCell>
+                        <TableCell>{item.anchorCustId}</TableCell>
                         <TableCell>
                           <Badge 
                             variant={item.overdueDays > 60 ? "destructive" : item.overdueDays > 30 ? "secondary" : "outline"}
@@ -332,6 +335,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR001",
     dealerName: "Sharma Electronics",
     anchorName: "HDFC Bank",
+    anchorCustId: "HDFC0001234",
     programName: "Supply Chain Finance",
     programCustId: "SCF2023-001",
     overdueDays: 75,
@@ -344,6 +348,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR002",
     dealerName: "Patel Distributors",
     anchorName: "Reliance Industries",
+    anchorCustId: "RIL9876543",
     programName: "Vendor Financing",
     programCustId: "VF2023-045",
     overdueDays: 45,
@@ -356,6 +361,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR003",
     dealerName: "Singh Auto Parts",
     anchorName: "Tata Motors",
+    anchorCustId: "TAT0000001",
     programName: "Dealer Financing",
     programCustId: "DF2023-089",
     overdueDays: 60,
@@ -368,6 +374,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR004",
     dealerName: "Agarwal Traders",
     anchorName: "HDFC Bank",
+    anchorCustId: "HDFC0000002",
     programName: "Supply Chain Finance",
     programCustId: "SCF2023-078",
     overdueDays: 30,
@@ -380,6 +387,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR005",
     dealerName: "Mehta Enterprises",
     anchorName: "State Bank of India",
+    anchorCustId: "SBI0000001",
     programName: "Vendor Financing",
     programCustId: "VF2023-112",
     overdueDays: 90,
@@ -392,6 +400,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR006",
     dealerName: "Gupta Hardware",
     anchorName: "Reliance Industries",
+    anchorCustId: "RIL9876544",
     programName: "Supply Chain Finance",
     programCustId: "SCF2023-156",
     overdueDays: 15,
@@ -404,6 +413,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR007",
     dealerName: "Joshi Electronics",
     anchorName: "HDFC Bank",
+    anchorCustId: "HDFC0000003",
     programName: "Distributor Financing",
     programCustId: "DF2023-201",
     overdueDays: 55,
@@ -416,6 +426,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR008",
     dealerName: "Kumar Supplies",
     anchorName: "Tata Motors",
+    anchorCustId: "TAT0000002",
     programName: "Dealer Financing",
     programCustId: "DF2023-245",
     overdueDays: 40,
@@ -428,6 +439,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR009",
     dealerName: "Reddy Motors",
     anchorName: "State Bank of India",
+    anchorCustId: "SBI0000002",
     programName: "Vendor Financing",
     programCustId: "VF2023-298",
     overdueDays: 85,
@@ -440,6 +452,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR010",
     dealerName: "Choudhary Traders",
     anchorName: "Reliance Industries",
+    anchorCustId: "RIL9876545",
     programName: "Supply Chain Finance",
     programCustId: "SCF2023-312",
     overdueDays: 25,
@@ -452,6 +465,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR011",
     dealerName: "Iyer Electronics",
     anchorName: "HDFC Bank",
+    anchorCustId: "HDFC0000004",
     programName: "Distributor Financing",
     programCustId: "DF2023-367",
     overdueDays: 70,
@@ -464,6 +478,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR012",
     dealerName: "Sharma Distributors",
     anchorName: "Tata Motors",
+    anchorCustId: "TAT0000003",
     programName: "Dealer Financing",
     programCustId: "DF2023-389",
     overdueDays: 35,
@@ -476,6 +491,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR013",
     dealerName: "Patel Auto Parts",
     anchorName: "State Bank of India",
+    anchorCustId: "SBI0000003",
     programName: "Vendor Financing",
     programCustId: "VF2023-425",
     overdueDays: 80,
@@ -488,6 +504,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR014",
     dealerName: "Verma Enterprises",
     anchorName: "Reliance Industries",
+    anchorCustId: "RIL9876546",
     programName: "Supply Chain Finance",
     programCustId: "SCF2023-467",
     overdueDays: 20,
@@ -500,6 +517,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR015",
     dealerName: "Mishra Traders",
     anchorName: "HDFC Bank",
+    anchorCustId: "HDFC0000005",
     programName: "Distributor Financing",
     programCustId: "DF2023-512",
     overdueDays: 65,
@@ -512,6 +530,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR016",
     dealerName: "Bansal Electronics",
     anchorName: "Tata Motors",
+    anchorCustId: "TAT0000004",
     programName: "Dealer Financing",
     programCustId: "DF2023-534",
     overdueDays: 30,
@@ -524,6 +543,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR017",
     dealerName: "Kapoor Supplies",
     anchorName: "State Bank of India",
+    anchorCustId: "SBI0000004",
     programName: "Vendor Financing",
     programCustId: "VF2023-578",
     overdueDays: 75,
@@ -536,6 +556,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR018",
     dealerName: "Malhotra Traders",
     anchorName: "Reliance Industries",
+    anchorCustId: "RIL9876547",
     programName: "Supply Chain Finance",
     programCustId: "SCF2023-612",
     overdueDays: 15,
@@ -548,6 +569,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR019",
     dealerName: "Khanna Motors",
     anchorName: "HDFC Bank",
+    anchorCustId: "HDFC0000006",
     programName: "Distributor Financing",
     programCustId: "DF2023-645",
     overdueDays: 60,
@@ -560,6 +582,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR020",
     dealerName: "Agarwal Enterprises",
     anchorName: "Tata Motors",
+    anchorCustId: "TAT0000005",
     programName: "Dealer Financing",
     programCustId: "DF2023-678",
     overdueDays: 25,
@@ -572,6 +595,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR021",
     dealerName: "Desai Trading Co.",
     anchorName: "State Bank of India",
+    anchorCustId: "SBI0000005",
     programName: "Vendor Financing",
     programCustId: "VF2023-712",
     overdueDays: 70,
@@ -584,6 +608,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR022",
     dealerName: "Bajaj Industries",
     anchorName: "Reliance Industries",
+    anchorCustId: "RIL9876548",
     programName: "Supply Chain Finance",
     programCustId: "SCF2023-745",
     overdueDays: 10,
@@ -596,6 +621,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR023",
     dealerName: "Menon Distributors",
     anchorName: "HDFC Bank",
+    anchorCustId: "HDFC0000007",
     programName: "Distributor Financing",
     programCustId: "DF2023-789",
     overdueDays: 55,
@@ -608,6 +634,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR024",
     dealerName: "Saxena Enterprises",
     anchorName: "Tata Motors",
+    anchorCustId: "TAT0000006",
     programName: "Dealer Financing",
     programCustId: "DF2023-823",
     overdueDays: 20,
@@ -620,6 +647,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR025",
     dealerName: "Rao Technologies",
     anchorName: "State Bank of India",
+    anchorCustId: "SBI0000006",
     programName: "Vendor Financing",
     programCustId: "VF2023-867",
     overdueDays: 65,
@@ -632,6 +660,7 @@ const dealerFldgData: DealerFLDGData[] = [
     dealerId: "DLR026",
     dealerName: "Nair Supplies",
     anchorName: "Reliance Industries",
+    anchorCustId: "RIL9876549",
     programName: "Supply Chain Finance",
     programCustId: "SCF2023-901",
     overdueDays: 5,

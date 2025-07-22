@@ -36,6 +36,7 @@ export type DealerMaster = {
   dealerCustId: string
   name: string
   anchor: string
+  anchorCustId: string
   programName: string
   programCustId: string
   contactPerson: string

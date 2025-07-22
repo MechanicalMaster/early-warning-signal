@@ -35,6 +35,9 @@ export function StopSupplyDetail({ dealer }: { dealer: StopSupplyDealer }) {
 
               <dt className="font-medium">Anchor:</dt>
               <dd>{dealer.anchor}</dd>
+
+              <dt className="font-medium">Anchor Cust ID:</dt>
+              <dd>{dealer.anchorCustId}</dd>
             </dl>
           </CardContent>
         </Card>

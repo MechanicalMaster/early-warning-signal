@@ -123,6 +123,7 @@ export default function DealerStatusPage() {
                     <TableHead>Dealer Cust ID</TableHead>
                     <TableHead>Name</TableHead>
                     <TableHead>Anchor</TableHead>
+                    <TableHead>Anchor Cust ID</TableHead>
                     <TableHead>Sanctioned Limit</TableHead>
                     <TableHead>Utilised Limit</TableHead>
                     <TableHead>Utilisation %</TableHead>
@@ -138,6 +139,7 @@ export default function DealerStatusPage() {
                       <TableCell className="font-medium">{dealer.dealerCustId}</TableCell>
                       <TableCell>{dealer.name}</TableCell>
                       <TableCell>{dealer.anchor}</TableCell>
+                      <TableCell>{dealer.anchorCustId}</TableCell>
                       <TableCell>₹{dealer.sanctionedLimit.toLocaleString()}</TableCell>
                       <TableCell>₹{dealer.utilisedLimit.toLocaleString()}</TableCell>
                       <TableCell>{dealer.utilisationPercentage}%</TableCell>
@@ -229,6 +231,7 @@ const dealerStatusData: Dealer[] = [
     dealerCustId: "RTLHDFC0001",
     name: "Reliance Retail",
     anchor: "HDFC Bank",
+    anchorCustId: "HDFC0001234",
     programName: "HDFC Supply Chain Finance",
     programCustId: "SCF-HD-001",
     status: "Active",
@@ -243,6 +246,7 @@ const dealerStatusData: Dealer[] = [
     dealerCustId: "FLPIC0023",
     name: "Flipkart India",
     anchor: "ICICI Bank",
+    anchorCustId: "ICICI7890123",
     programName: "ICICI Distributor Finance",
     programCustId: "DF-IC-052",
     status: "Active",
@@ -257,6 +261,7 @@ const dealerStatusData: Dealer[] = [
     dealerCustId: "AMZAXS0045",
     name: "Amazon Seller Services",
     anchor: "Axis Bank",
+    anchorCustId: "AXB1092837",
     programName: "Axis Channel Finance",
     programCustId: "CF-AXB-045",
     status: "Inactive",
@@ -271,6 +276,7 @@ const dealerStatusData: Dealer[] = [
     dealerCustId: "BIJSBI0078",
     name: "Bijou Electronics",
     anchor: "State Bank of India",
+    anchorCustId: "SBI9087654",
     programName: "SBI Supply Chain Finance",
     programCustId: "SCF-SBI-012",
     status: "Active",
@@ -285,6 +291,7 @@ const dealerStatusData: Dealer[] = [
     dealerCustId: "TATRIL0089",
     name: "Tata Electronics",
     anchor: "Reliance Industries",
+    anchorCustId: "RIL9876543",
     programName: "RIL Vendor Financing",
     programCustId: "VF-RIL-021",
     status: "Inactive",
@@ -299,6 +306,7 @@ const dealerStatusData: Dealer[] = [
     dealerCustId: "BPLHUL0101",
     name: "Best Price Logistics",
     anchor: "Hindustan Unilever",
+    anchorCustId: "HUL3456789",
     programName: "HUL Distributor Finance",
     programCustId: "DF-HUL-067",
     status: "Active",
@@ -313,6 +321,7 @@ const dealerStatusData: Dealer[] = [
     dealerCustId: "MYNDTCS0112",
     name: "Myntra Designs",
     anchor: "Tata Consultancy Services",
+    anchorCustId: "TCS5643210",
     programName: "TCS Partner Program",
     programCustId: "PP-TCS-105",
     status: "Active",
@@ -327,6 +336,7 @@ const dealerStatusData: Dealer[] = [
     dealerCustId: "GRSKMB0135",
     name: "Grofers India",
     anchor: "Kotak Mahindra Bank",
+    anchorCustId: "KMB2345678",
     programName: "Kotak Channel Finance",
     programCustId: "CF-KMB-034",
     status: "Inactive",
@@ -341,6 +351,7 @@ const dealerStatusData: Dealer[] = [
     dealerCustId: "BKSAIR0149",
     name: "Booksellers Network",
     anchor: "Bharti Airtel",
+    anchorCustId: "AIR6789012",
     programName: "Airtel Dealer Finance",
     programCustId: "DF-AIR-089",
     status: "Active",
@@ -355,6 +366,7 @@ const dealerStatusData: Dealer[] = [
     dealerCustId: "APPINF0153",
     name: "Appario Retail",
     anchor: "Infosys Limited",
+    anchorCustId: "INF4560987",
     programName: "Infosys Dealer Finance",
     programCustId: "DF-INF-078",
     status: "Active",
@@ -369,6 +381,7 @@ const dealerStatusData: Dealer[] = [
     dealerCustId: "URBHDFC0169",
     name: "Urban Company",
     anchor: "HDFC Bank",
+    anchorCustId: "HDFC0001234",
     programName: "HDFC Supply Chain Finance",
     programCustId: "SCF-HD-001",
     status: "Active",
@@ -383,6 +396,7 @@ const dealerStatusData: Dealer[] = [
     dealerCustId: "BIGBIC0174",
     name: "BigBasket",
     anchor: "ICICI Bank",
+    anchorCustId: "ICICI7890123",
     programName: "ICICI Distributor Finance",
     programCustId: "DF-IC-052",
     status: "Inactive",
@@ -397,6 +411,7 @@ const dealerStatusData: Dealer[] = [
     dealerCustId: "DMTAXS0188",
     name: "DMart",
     anchor: "Axis Bank",
+    anchorCustId: "AXB1092837",
     programName: "Axis Channel Finance",
     programCustId: "CF-AXB-045",
     status: "Active",
@@ -411,6 +426,7 @@ const dealerStatusData: Dealer[] = [
     dealerCustId: "SWGSBI0196",
     name: "Swiggy",
     anchor: "State Bank of India",
+    anchorCustId: "SBI9087654",
     programName: "SBI Supply Chain Finance",
     programCustId: "SCF-SBI-012",
     status: "Active",
@@ -425,6 +441,7 @@ const dealerStatusData: Dealer[] = [
     dealerCustId: "ZOMRIL0205",
     name: "Zomato",
     anchor: "Reliance Industries",
+    anchorCustId: "RIL9876543",
     programName: "RIL Vendor Financing",
     programCustId: "VF-RIL-021",
     status: "Inactive",
@@ -439,6 +456,7 @@ const dealerStatusData: Dealer[] = [
     dealerCustId: "NYKAHUL0217",
     name: "Nykaa",
     anchor: "Hindustan Unilever",
+    anchorCustId: "HUL3456789",
     programName: "HUL Distributor Finance",
     programCustId: "DF-HUL-067",
     status: "Active",
@@ -453,6 +471,7 @@ const dealerStatusData: Dealer[] = [
     dealerCustId: "LNSTCS0229",
     name: "Lenskart",
     anchor: "Tata Consultancy Services",
+    anchorCustId: "TCS5643210",
     programName: "TCS Partner Program",
     programCustId: "PP-TCS-105",
     status: "Active",
@@ -467,6 +486,7 @@ const dealerStatusData: Dealer[] = [
     dealerCustId: "PHRKMB0234",
     name: "PharmEasy",
     anchor: "Kotak Mahindra Bank",
+    anchorCustId: "KMB2345678",
     programName: "Kotak Channel Finance",
     programCustId: "CF-KMB-034",
     status: "Active",
@@ -481,6 +501,7 @@ const dealerStatusData: Dealer[] = [
     dealerCustId: "CRDAIR0246",
     name: "CarDekho",
     anchor: "Bharti Airtel",
+    anchorCustId: "AIR6789012",
     programName: "Airtel Dealer Finance",
     programCustId: "DF-AIR-089",
     status: "Inactive",
@@ -495,6 +516,7 @@ const dealerStatusData: Dealer[] = [
     dealerCustId: "MMINF0251",
     name: "MakeMyTrip",
     anchor: "Infosys Limited",
+    anchorCustId: "INF4560987",
     programName: "Infosys Dealer Finance",
     programCustId: "DF-INF-078",
     status: "Active",
