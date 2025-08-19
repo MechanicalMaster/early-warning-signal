@@ -21,7 +21,8 @@ interface StopSupplyRule {
   sendReminder: "yes" | "no"
   reminderDays: number
   emailsToSend: number
-  amount: number
+  allowedOverdueAmount: number
+  allowedOverdueDays: number
 }
 
 interface FLDGRule {
@@ -55,7 +56,8 @@ export default function ConfigurationPage() {
       sendReminder: "yes",
       reminderDays: 7,
       emailsToSend: 3,
-      amount: 50000
+      allowedOverdueAmount: 50000,
+      allowedOverdueDays: 30
     },
     {
       id: 2,
@@ -65,7 +67,8 @@ export default function ConfigurationPage() {
       sendReminder: "no",
       reminderDays: 0,
       emailsToSend: 0,
-      amount: 0
+      allowedOverdueAmount: 0,
+      allowedOverdueDays: 0
     }
   ])
 
@@ -226,12 +229,24 @@ export default function ConfigurationPage() {
                           </div>
 
                           <div className="space-y-2">
-                            <Label>Amount</Label>
+                            <Label>Allowed Overdue Days</Label>
                             <Input 
                               type="number" 
-                              value={rule.amount} 
+                              value={rule.allowedOverdueDays} 
                               onChange={(e) => {
-                                setRules(rules.map(r => r.id === rule.id ? {...r, amount: parseInt(e.target.value)} : r))
+                                setRules(rules.map(r => r.id === rule.id ? {...r, allowedOverdueDays: parseInt(e.target.value)} : r))
+                              }}
+                              min="0"
+                            />
+                          </div>
+
+                          <div className="space-y-2">
+                            <Label>Allowed Overdue Amount</Label>
+                            <Input 
+                              type="number" 
+                              value={rule.allowedOverdueAmount} 
+                              onChange={(e) => {
+                                setRules(rules.map(r => r.id === rule.id ? {...r, allowedOverdueAmount: parseInt(e.target.value)} : r))
                               }}
                               min="0"
                             />
@@ -420,12 +435,24 @@ export default function ConfigurationPage() {
               </div>
 
               <div className="space-y-2">
-                <Label>Amount</Label>
+                <Label>Allowed Overdue Days</Label>
                 <Input 
                   type="number" 
-                  value={rules[0].amount} 
+                  value={rules[0].allowedOverdueDays} 
                   onChange={(e) => {
-                    setRules(rules.map(r => r.id === 1 ? {...r, amount: parseInt(e.target.value)} : r))
+                    setRules(rules.map(r => r.id === 1 ? {...r, allowedOverdueDays: parseInt(e.target.value)} : r))
+                  }}
+                  min="0"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label>Allowed Overdue Amount</Label>
+                <Input 
+                  type="number" 
+                  value={rules[0].allowedOverdueAmount} 
+                  onChange={(e) => {
+                    setRules(rules.map(r => r.id === 1 ? {...r, allowedOverdueAmount: parseInt(e.target.value)} : r))
                   }}
                   min="0"
                 />
@@ -482,7 +509,8 @@ export default function ConfigurationPage() {
                 sendReminder: rules[0].sendReminder,
                 reminderDays: rules[0].sendReminder ? rules[0].reminderDays : 0,
                 emailsToSend: rules[0].emailsToSend,
-                amount: rules[0].amount
+                allowedOverdueAmount: rules[0].allowedOverdueAmount,
+                allowedOverdueDays: rules[0].allowedOverdueDays
               }
               setRules([...rules, newRuleData])
               setIsAddNewRuleOpen(false)
