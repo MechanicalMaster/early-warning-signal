@@ -24,7 +24,7 @@ export default function LoginPage() {
     try {
       const user = await login(email, password)
       if (user) {
-        router.push("/dashboard")
+        router.push("/anchor-master")
       } else {
         setError("Invalid email or password")
       }

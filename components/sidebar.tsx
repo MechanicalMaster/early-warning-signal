@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation"
 import { useSidebar } from "./sidebar-provider"
 import { cn } from "@/lib/utils"
 import {
-  LayoutDashboard,
   Settings,
   HelpCircle,
   LogOut,
@@ -208,9 +207,7 @@ export function Sidebar() {
   )
 }
 
-const navItems: NavItem[] = [
-  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard }
-];
+const navItems: NavItem[] = [];
 
 const masterItems: NavItem[] = [
   { name: "Anchor Master", href: "/anchor-master", icon: Anchor },
