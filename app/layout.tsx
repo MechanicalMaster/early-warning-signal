@@ -9,8 +9,8 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Early Warning Signal Dashboard",
-  description: "Admin dashboard for Early Warning Signal management",
+  title: "Early Warning Signal",
+  description: "Early Warning Signal management system",
     generator: 'v0.dev'
 }
 
